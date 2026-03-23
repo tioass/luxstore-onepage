@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install:*)",
+      "Bash(npx sanity:*)",
+      "Bash(pkill -f \"sanity login\")",
+      "Bash(pkill -f \"sanity deploy\")",
+      "Bash(npm list:*)",
+      "Bash(curl -s \"https://syny9o6g.apicdn.sanity.io/v2024-01-01/data/query/production?query=*[_type%20%3D%3D%20%22hero%22][0]\")",
+      "Bash(curl -v \"https://syny9o6g.apicdn.sanity.io/v2024-01-01/data/query/production?query=*%5B_type+%3D%3D+%22hero%22%5D%5B0%5D\")",
+      "Bash(curl -s -I -H \"Origin: https://enchanting-otter-9602ff.netlify.app\" \"https://syny9o6g.apicdn.sanity.io/v2024-01-01/data/query/production?query=*[_type==%22hero%22][0]\")",
+      "Bash(brew install:*)",
+      "Bash(gh auth:*)",
+      "Bash(gh repo:*)",
+      "Bash(gh api:*)",
+      "Bash(open \"/Users/andressentis/Library/CloudStorage/GoogleDrive-andy@ander.agency/Mi unidad/Proyectos AA/Claude Experiments/tech-onepage/index.html\")",
+      "mcp__Claude_Preview__preview_start"
+    ]
+  }
+}

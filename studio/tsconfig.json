@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "lib": ["ES2017", "DOM"],
+    "jsx": "react-jsx",
+    "target": "ES2017",
+    "moduleResolution": "node",
+    "module": "ESNext",
+    "esModuleInterop": true,
+    "strict": true,
+    "skipLibCheck": true
+  },
+  "include": ["**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"]
+}

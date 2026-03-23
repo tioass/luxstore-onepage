@@ -1,0 +1,598 @@
+[
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Aparece en el header y el footer.",
+        "name": "brandName",
+        "type": "string",
+        "title": "Nombre de la Marca"
+      },
+      {
+        "rows": 2,
+        "description": "Texto descriptivo debajo del logo en el footer.",
+        "name": "footerTagline",
+        "type": "text",
+        "title": "Tagline del Footer"
+      },
+      {
+        "description": "Ej: © 2025 Luxstore. Todos los derechos reservados.",
+        "name": "footerCopyright",
+        "type": "string",
+        "title": "Texto de Copyright"
+      }
+    ],
+    "name": "siteSettings",
+    "type": "document",
+    "title": "⚙️  Configuración del Sitio"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Ej: iPhone 17 Pro",
+        "name": "headline",
+        "type": "string",
+        "title": "Título principal"
+      },
+      {
+        "description": "Ej: Titanio Inteligente. Cosmic Orange.",
+        "name": "subheadline",
+        "type": "string",
+        "title": "Subtítulo"
+      },
+      {
+        "description": "Ej: Pedilo ahora",
+        "name": "ctaPrimary",
+        "type": "string",
+        "title": "Botón principal (texto)"
+      },
+      {
+        "description": "Ej: Ver más",
+        "name": "ctaSecondary",
+        "type": "string",
+        "title": "Botón secundario (texto)"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "description": "Imagen de fondo del hero. Recomendado: 1440×900px.",
+        "name": "backgroundImage",
+        "type": "image",
+        "title": "Imagen de fondo"
+      }
+    ],
+    "name": "hero",
+    "type": "document",
+    "title": "🚀 Hero"
+  },
+  {
+    "fields": [
+      {
+        "description": "Texto pequeño en mayúsculas. Ej: LA LÍNEA",
+        "name": "sectionLabel",
+        "type": "string",
+        "title": "Etiqueta de sección"
+      },
+      {
+        "description": "Ej: iPhone.",
+        "name": "sectionTitle",
+        "type": "string",
+        "title": "Título de sección"
+      },
+      {
+        "description": "El iPhone que ocupa el lugar principal.",
+        "to": [
+          {
+            "type": "product"
+          }
+        ],
+        "name": "featuredProduct",
+        "type": "reference",
+        "title": "Producto destacado (card grande)"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "max",
+                "constraint": 3
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Los 3 iPhones que aparecen a la derecha del destacado.",
+        "of": [
+          {
+            "to": [
+              {
+                "type": "product"
+              }
+            ],
+            "type": "reference",
+            "title": "Reference to producto"
+          }
+        ],
+        "name": "sideProducts",
+        "type": "array",
+        "title": "Lista lateral (3 productos)"
+      },
+      {
+        "of": [
+          {
+            "fields": [
+              {
+                "name": "model",
+                "type": "string",
+                "title": "Modelo"
+              },
+              {
+                "name": "storage",
+                "type": "string",
+                "title": "Almacenamiento"
+              },
+              {
+                "name": "startingPrice",
+                "type": "number",
+                "title": "Precio desde (USD)"
+              }
+            ],
+            "type": "object",
+            "name": "priceRow",
+            "title": "Fila"
+          }
+        ],
+        "name": "priceTable",
+        "type": "array",
+        "title": "Tabla de precios completa"
+      }
+    ],
+    "name": "iphoneSection",
+    "type": "document",
+    "title": "📱 Sección — iPhones"
+  },
+  {
+    "fields": [
+      {
+        "fields": [
+          {
+            "name": "name",
+            "type": "string",
+            "title": "Nombre"
+          },
+          {
+            "name": "tagline",
+            "type": "string",
+            "title": "Descripción corta"
+          },
+          {
+            "name": "badge",
+            "type": "string",
+            "title": "Badge (ej: Lanzamiento)"
+          },
+          {
+            "options": {
+              "hotspot": true
+            },
+            "name": "image",
+            "type": "image",
+            "title": "Imagen"
+          }
+        ],
+        "name": "ipadPro",
+        "type": "object",
+        "title": "iPad Pro (card grande)"
+      },
+      {
+        "fields": [
+          {
+            "name": "name",
+            "type": "string",
+            "title": "Nombre"
+          },
+          {
+            "name": "tagline",
+            "type": "string",
+            "title": "Descripción corta"
+          },
+          {
+            "description": "Ej: M4 Max, Liquid XDR",
+            "of": [
+              {
+                "type": "string"
+              }
+            ],
+            "name": "chips",
+            "type": "array",
+            "title": "Chips / Tags técnicos"
+          },
+          {
+            "options": {
+              "hotspot": true
+            },
+            "name": "image",
+            "type": "image",
+            "title": "Imagen"
+          }
+        ],
+        "name": "macbook",
+        "type": "object",
+        "title": "MacBook Pro"
+      },
+      {
+        "fields": [
+          {
+            "name": "name",
+            "type": "string",
+            "title": "Nombre"
+          },
+          {
+            "name": "tagline",
+            "type": "string",
+            "title": "Descripción corta"
+          },
+          {
+            "options": {
+              "hotspot": true
+            },
+            "name": "image",
+            "type": "image",
+            "title": "Imagen"
+          }
+        ],
+        "name": "imac",
+        "type": "object",
+        "title": "iMac"
+      },
+      {
+        "fields": [
+          {
+            "name": "name",
+            "type": "string",
+            "title": "Nombre"
+          },
+          {
+            "name": "tagline",
+            "type": "string",
+            "title": "Descripción corta"
+          },
+          {
+            "options": {
+              "hotspot": true
+            },
+            "name": "image",
+            "type": "image",
+            "title": "Imagen"
+          }
+        ],
+        "name": "macStudio",
+        "type": "object"
+      }
+    ],
+    "name": "bentoSection",
+    "type": "document",
+    "title": "💻 Sección — iPad y Mac"
+  },
+  {
+    "fields": [
+      {
+        "description": "Texto pequeño en mayúsculas. Ej: ESENCIALES",
+        "name": "sectionLabel",
+        "type": "string",
+        "title": "Etiqueta de sección"
+      },
+      {
+        "description": "Ej: Wearables y Audio.",
+        "name": "sectionTitle",
+        "type": "string",
+        "title": "Título de sección"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "max",
+                "constraint": 3
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Los 3 productos que aparecen en las cards de esta sección.",
+        "of": [
+          {
+            "to": [
+              {
+                "type": "product"
+              }
+            ],
+            "type": "reference",
+            "title": "Reference to producto"
+          }
+        ],
+        "name": "products",
+        "type": "array",
+        "title": "Productos (máx. 3)"
+      }
+    ],
+    "name": "accessoriesSection",
+    "type": "document",
+    "title": "🎧 Sección — Wearables y Audio"
+  },
+  {
+    "fields": [
+      {
+        "description": "Ej: MÁS ALLÁ DE APPLE",
+        "name": "sectionLabel",
+        "type": "string",
+        "title": "Etiqueta de sección"
+      },
+      {
+        "description": "Ej: Ecosistema de Alto Rendimiento.",
+        "name": "sectionTitle",
+        "type": "string",
+        "title": "Título de sección"
+      },
+      {
+        "of": [
+          {
+            "fields": [
+              {
+                "description": "Nombre del ícono. Ej: smartphone, sports_score, videogame_asset",
+                "name": "icon",
+                "type": "string",
+                "title": "Ícono (Material Symbol)"
+              },
+              {
+                "name": "name",
+                "type": "string",
+                "title": "Nombre del producto"
+              },
+              {
+                "name": "description",
+                "type": "string",
+                "title": "Descripción"
+              }
+            ],
+            "type": "object",
+            "name": "ecosystemItem",
+            "title": "Ítem"
+          }
+        ],
+        "name": "items",
+        "type": "array",
+        "title": "Productos del ecosistema"
+      }
+    ],
+    "name": "ecosystemSection",
+    "type": "document",
+    "title": "🎮 Sección — Ecosistema"
+  },
+  {
+    "fields": [
+      {
+        "description": "Ej: Pagos y Logística.",
+        "name": "title",
+        "type": "string",
+        "title": "Título de sección"
+      },
+      {
+        "rows": 3,
+        "description": "Texto introductorio de la sección.",
+        "name": "description",
+        "type": "text",
+        "title": "Descripción"
+      },
+      {
+        "of": [
+          {
+            "fields": [
+              {
+                "name": "label",
+                "type": "string",
+                "title": "Nombre"
+              },
+              {
+                "initialValue": false,
+                "description": "Aparece en azul/primario para resaltarlo.",
+                "name": "highlighted",
+                "type": "boolean",
+                "title": "¿Destacado?"
+              }
+            ],
+            "type": "object",
+            "name": "paymentMethod",
+            "title": "Método"
+          }
+        ],
+        "name": "methods",
+        "type": "array",
+        "title": "Métodos de pago"
+      },
+      {
+        "description": "Ej: Envíos sin cargo CABA",
+        "name": "shippingTitle",
+        "type": "string",
+        "title": "Título de envío"
+      },
+      {
+        "description": "Ej: Entrega en el día dentro de Capital Federal.",
+        "name": "shippingDescription",
+        "type": "string",
+        "title": "Descripción de envío"
+      },
+      {
+        "description": "Ej: Todo el hardware incluye garantía de 1 año global.",
+        "name": "warrantyText",
+        "type": "string",
+        "title": "Texto de garantía"
+      }
+    ],
+    "name": "paymentSection",
+    "type": "document",
+    "title": "💳 Sección — Pagos y Logística"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "name",
+        "type": "string",
+        "title": "Nombre del producto"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "iPhone",
+              "value": "iphone"
+            },
+            {
+              "title": "iPad",
+              "value": "ipad"
+            },
+            {
+              "title": "Mac",
+              "value": "mac"
+            },
+            {
+              "title": "Wearable / Audio",
+              "value": "wearable"
+            },
+            {
+              "title": "Android",
+              "value": "android"
+            },
+            {
+              "title": "Gaming",
+              "value": "gaming"
+            }
+          ],
+          "layout": "radio"
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "iphone",
+                  "ipad",
+                  "mac",
+                  "wearable",
+                  "android",
+                  "gaming"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "category",
+        "type": "string",
+        "title": "Categoría"
+      },
+      {
+        "description": "Una línea que resume el producto. Ej: El más delgado de la historia.",
+        "name": "tagline",
+        "type": "string",
+        "title": "Descripción corta"
+      },
+      {
+        "description": "Solo el número. Ej: 999",
+        "name": "startingPrice",
+        "type": "number",
+        "title": "Precio desde (USD)"
+      },
+      {
+        "description": "Ej: 256GB - 2TB",
+        "name": "storage",
+        "type": "string",
+        "title": "Almacenamiento disponible"
+      },
+      {
+        "description": "Lista de bullet points. Solo para el producto destacado.",
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "features",
+        "type": "array",
+        "title": "Características destacadas"
+      },
+      {
+        "description": "Ej: M4 Max, Liquid XDR. Solo para Macs.",
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "chips",
+        "type": "array",
+        "title": "Chips / Tags técnicos"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "image",
+        "type": "image",
+        "title": "Imagen del producto"
+      },
+      {
+        "description": "Ej: Comprar ahora",
+        "name": "ctaLabel",
+        "type": "string",
+        "title": "Texto del botón de acción"
+      },
+      {
+        "description": "Número menor = aparece primero.",
+        "name": "order",
+        "type": "number",
+        "title": "Orden de aparición"
+      }
+    ],
+    "name": "product",
+    "type": "document",
+    "title": "Producto"
+  }
+]

@@ -1,387 +1,220 @@
 <!DOCTYPE html>
-
-<html class="dark" lang="es"><head>
+<html class="dark" lang="es">
+<head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Luxstore | Distribución Tech Premium</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "on-primary-fixed": "#001b3f",
-                        "inverse-surface": "#e2e2e2",
-                        "surface-bright": "#393939",
-                        "on-primary-container": "#fcfbff",
-                        "surface-tint": "#abc7ff",
-                        "tertiary": "#c6c6c8",
-                        "on-secondary-fixed-variant": "#474649",
-                        "secondary-fixed-dim": "#c8c6c8",
-                        "surface-variant": "#353535",
-                        "on-background": "#e2e2e2",
-                        "tertiary-fixed": "#e2e2e4",
-                        "error": "#ffb4ab",
-                        "surface-container-high": "#2a2a2a",
-                        "on-primary": "#002f66",
-                        "surface-container-highest": "#353535",
-                        "on-surface": "#e2e2e2",
-                        "tertiary-container": "#727476",
-                        "on-secondary": "#303032",
-                        "surface-container-low": "#1b1b1b",
-                        "primary-fixed-dim": "#abc7ff",
-                        "on-primary-fixed-variant": "#00458f",
-                        "inverse-primary": "#005cbb",
-                        "primary-container": "#0071e3",
-                        "on-error-container": "#ffdad6",
-                        "surface-container-lowest": "#0e0e0e",
-                        "surface-dim": "#131313",
-                        "error-container": "#93000a",
-                        "outline": "#8b919f",
-                        "on-tertiary-container": "#fbfbfd",
-                        "surface-container": "#1f1f1f",
-                        "background": "#131313",
-                        "surface": "#131313",
-                        "primary-fixed": "#d7e2ff",
-                        "on-tertiary-fixed": "#1a1c1d",
-                        "inverse-on-surface": "#303030",
-                        "primary": "#abc7ff",
-                        "on-surface-variant": "#c1c6d6",
-                        "secondary-container": "#474649",
-                        "secondary": "#c8c6c8",
-                        "on-tertiary": "#2f3132",
-                        "on-error": "#690005",
-                        "secondary-fixed": "#e4e2e4",
-                        "on-secondary-fixed": "#1b1b1d",
-                        "tertiary-fixed-dim": "#c6c6c8",
-                        "outline-variant": "#414753",
-                        "on-tertiary-fixed-variant": "#454749",
-                        "on-secondary-container": "#b6b4b7"
-                    },
-                    fontFamily: {
-                        "headline": ["Inter"],
-                        "body": ["Inter"],
-                        "label": ["Inter"]
-                    },
-                    borderRadius: {"DEFAULT": "0.5rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
-                },
-            },
-        }
-    </script>
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "on-primary-fixed": "#001b3f",
+          "inverse-surface": "#e2e2e2",
+          "surface-bright": "#393939",
+          "on-primary-container": "#fcfbff",
+          "surface-tint": "#abc7ff",
+          "tertiary": "#c6c6c8",
+          "on-secondary-fixed-variant": "#474649",
+          "secondary-fixed-dim": "#c8c6c8",
+          "surface-variant": "#353535",
+          "on-background": "#e2e2e2",
+          "tertiary-fixed": "#e2e2e4",
+          "error": "#ffb4ab",
+          "surface-container-high": "#2a2a2a",
+          "on-primary": "#002f66",
+          "surface-container-highest": "#353535",
+          "on-surface": "#e2e2e2",
+          "tertiary-container": "#727476",
+          "on-secondary": "#303032",
+          "surface-container-low": "#1b1b1b",
+          "primary-fixed-dim": "#abc7ff",
+          "on-primary-fixed-variant": "#00458f",
+          "inverse-primary": "#005cbb",
+          "primary-container": "#0071e3",
+          "on-error-container": "#ffdad6",
+          "surface-container-lowest": "#0e0e0e",
+          "surface-dim": "#131313",
+          "error-container": "#93000a",
+          "outline": "#8b919f",
+          "on-tertiary-container": "#fbfbfd",
+          "surface-container": "#1f1f1f",
+          "background": "#131313",
+          "surface": "#131313",
+          "primary-fixed": "#d7e2ff",
+          "on-tertiary-fixed": "#1a1c1d",
+          "inverse-on-surface": "#303030",
+          "primary": "#abc7ff",
+          "on-surface-variant": "#c1c6d6",
+          "secondary-container": "#474649",
+          "secondary": "#c8c6c8",
+          "on-tertiary": "#2f3132",
+          "on-error": "#690005",
+          "secondary-fixed": "#e4e2e4",
+          "on-secondary-fixed": "#1b1b1d",
+          "tertiary-fixed-dim": "#c6c6c8",
+          "outline-variant": "#414753",
+          "on-tertiary-fixed-variant": "#454749",
+          "on-secondary-container": "#b6b4b7"
+        },
+        fontFamily: {
+          "headline": ["Inter"],
+          "body":     ["Inter"],
+          "label":    ["Inter"]
+        },
+        borderRadius: {
+          "DEFAULT": "0.5rem",
+          "lg": "0.5rem",
+          "xl": "0.75rem",
+          "full": "9999px"
+        },
+      },
+    },
+  }
+</script>
 <style>
-        .glass-nav {
-            background: rgba(19, 19, 19, 0.8);
-            backdrop-filter: blur(20px);
-        }
-        .text-gradient-orange {
-            background: linear-gradient(135deg, #ff8c00 0%, #ff4500 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-    </style>
-<!-- CMS: conecta con Sanity para contenido dinámico -->
+  .glass-nav {
+    background: rgba(19, 19, 19, 0.8);
+    backdrop-filter: blur(20px);
+  }
+  .text-gradient-orange {
+    background: linear-gradient(135deg, #ff8c00 0%, #ff4500 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>
 <script src="cms.js" defer></script>
 </head>
+
 <body class="bg-background text-on-background font-body antialiased">
-<!-- Simplified Brand Header -->
+
+<!-- ── Header ──────────────────────────────────────────────── -->
 <header class="fixed top-0 w-full z-50 glass-nav">
-<div class="flex justify-center items-center px-12 h-16 max-w-[1440px] mx-auto">
-<div class="text-2xl font-bold tracking-tighter text-[#e2e2e2]" data-cms="site.brandName">Luxstore</div>
-</div>
+  <div class="flex justify-center items-center px-12 h-16 max-w-[1440px] mx-auto">
+    <div class="text-2xl font-bold tracking-tighter text-[#e2e2e2]" data-cms="site.brandName">
+      Luxstore
+    </div>
+  </div>
 </header>
-<!-- Hero Section -->
+
+<!-- ── Hero ────────────────────────────────────────────────── -->
 <section class="relative h-screen flex flex-col items-center justify-center overflow-hidden pt-16">
-<div class="z-10 text-center px-4">
-<h1 class="text-5xl md:text-8xl font-black tracking-tighter mb-4 animate-fade-in" data-cms="hero.headline">
-                iPhone 17 Pro
-            </h1>
-<p class="text-2xl md:text-3xl font-medium tracking-tight text-gradient-orange mb-8" data-cms="hero.subheadline">
-                Titanio Inteligente. Cosmic Orange.
-            </p>
-<div class="flex gap-4 justify-center">
-<button class="bg-primary-container text-on-primary-container px-8 py-3 rounded-full font-semibold hover:opacity-90 transition-all active:scale-95" data-cms="hero.ctaPrimary">
-                    Pedilo ahora
-                </button>
-<button class="bg-surface-variant/50 backdrop-blur-md text-on-surface border border-outline-variant/20 px-8 py-3 rounded-full font-semibold hover:bg-surface-variant transition-all" data-cms="hero.ctaSecondary">
-                    Ver más
-                </button>
-</div>
-</div>
-<div class="absolute inset-0 z-0 flex items-center justify-center opacity-40">
-<img alt="Smartphone moderno flotando en el espacio naranja oscuro" class="w-full h-full object-cover" data-cms-src="hero.backgroundImage" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2zDw6kJhHqiBtbJcuMWyA1OfIPMDFxEeOKZ6qVBBEhdkGNs7mC8Md84Sguzc6Tt00qT4Zkf4zNQT7nFUbc-EXe5tTJJ8hb3FNmZ8RGiLIfrxiqm8RvVmtCpSSo3s30kHsrslpPbHaGzriwVlX9qveVVINBhbCi_nserKz1NcZewaCh6oYBtsk2Hz89o3wF1bfxTw9YuA096JMmG-Vwfszwv220Tip7iYdYrl7dT87Rb84xfrrndk1NBwGdd6YHYRMBJEl7q6h2uk"/>
-</div>
-<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+  <div class="z-10 text-center px-4">
+    <h1 class="text-5xl md:text-8xl font-black tracking-tighter mb-4" data-cms="hero.headline">
+      iPhone 17 Pro
+    </h1>
+    <p class="text-2xl md:text-3xl font-medium tracking-tight text-gradient-orange mb-8" data-cms="hero.subheadline">
+      Titanio Inteligente. Cosmic Orange.
+    </p>
+    <div class="flex gap-4 justify-center">
+      <button class="bg-primary-container text-on-primary-container px-8 py-3 rounded-full font-semibold hover:opacity-90 transition-all active:scale-95" data-cms="hero.ctaPrimary">
+        Pedilo ahora
+      </button>
+      <button class="bg-surface-variant/50 backdrop-blur-md text-on-surface border border-outline-variant/20 px-8 py-3 rounded-full font-semibold hover:bg-surface-variant transition-all" data-cms="hero.ctaSecondary">
+        Ver más
+      </button>
+    </div>
+  </div>
+  <div class="absolute inset-0 z-0 flex items-center justify-center opacity-40">
+    <img
+      data-cms-src="hero.backgroundImage"
+      src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2zDw6kJhHqiBtbJcuMWyA1OfIPMDFxEeOKZ6qVBBEhdkGNs7mC8Md84Sguzc6Tt00qT4Zkf4zNQT7nFUbc-EXe5tTJJ8hb3FNmZ8RGiLIfrxiqm8RvVmtCpSSo3s30kHsrslpPbHaGzriwVlX9qveVVINBhbCi_nserKz1NcZewaCh6oYBtsk2Hz89o3wF1bfxTw9YuA096JMmG-Vwfszwv220Tip7iYdYrl7dT87Rb84xfrrndk1NBwGdd6YHYRMBJEl7q6h2uk"
+      alt="Hero background"
+      class="w-full h-full object-cover"/>
+  </div>
+  <div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
 </section>
-<!-- Pricing Tables: iPhones -->
-<section class="py-24 max-w-[1440px] mx-auto px-12">
-<div class="mb-16">
-<span class="label-md tracking-[0.2em] text-primary mb-4 block" data-cms="iphone.sectionLabel">LA LÍNEA</span>
-<h2 class="text-4xl md:text-6xl font-bold tracking-tight" data-cms="iphone.sectionTitle">iPhone.</h2>
-</div>
-<div class="grid grid-cols-1 lg:grid-cols-12 gap-1">
-<!-- Featured: 17 Pro -->
-<div class="lg:col-span-8 bg-surface-container rounded-xl p-12 flex flex-col md:flex-row items-center gap-12 overflow-hidden">
-<div class="flex-1">
-<h3 class="text-3xl font-bold mb-2" data-cms="iphone.featured.name">iPhone 17 Pro</h3>
-<p class="text-on-surface-variant mb-6" data-cms="iphone.featured.tagline">El máximo rendimiento. Desde USD 999.</p>
-<ul class="space-y-3 mb-8" data-cms-list="iphone.featured.features">
-<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> Chip A19 Pro</li>
-<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> Acabado en Titanio</li>
-<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> Teleobjetivo Periscópico 48MP</li>
-</ul>
-<button class="text-primary-container font-bold flex items-center gap-2 group"><span data-cms="iphone.featured.cta">Comprar ahora</span> <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">chevron_right</span></button>
-</div>
-<div class="flex-1">
-<img alt="Perfil lateral de smartphone de titanio elegante" class="rounded-lg shadow-2xl w-full h-auto object-contain scale-110" data-cms-src="iphone.featured.image" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9_QfbKLqBdNLf3EHEqiaattsjqZLoTeW8hoQS6KXe_hEU0vwwnKWadHIXhmoCBGyqmv3S5FSSH19LPNtFQg9Yr0stZPsdSoGs33-VU1HxeXKwNeMgHKP3wybEiTrPejw9bj_NoThjRklCdyKk1FL4CGsQa3lFkjqlf6s_1Z7fzmy6plDPn2qT1xG2Wtjpkw0DMKKWj4tln5NkmjMYyYgEJReJUfPdjt55MkVAdIBCbIfoygZQmPDCwNelayNki33GNJfU65gdmA0"/>
-</div>
-</div>
-<!-- Side List -->
-<div class="lg:col-span-4 flex flex-col gap-1" data-cms-list="iphone.sideProducts">
-<div class="bg-surface-container-low p-8 rounded-xl flex justify-between items-center group cursor-default transition-colors">
-<div>
-<h4 class="font-bold">iPhone 17 Air</h4>
-<p class="text-sm text-on-surface-variant">El más delgado de la historia. Desde USD 899</p>
-</div>
-</div>
-<div class="bg-surface-container-low p-8 rounded-xl flex justify-between items-center group cursor-default transition-colors">
-<div>
-<h4 class="font-bold">iPhone 16 Pro Max</h4>
-<p class="text-sm text-on-surface-variant">El poder del 16. Desde USD 1099</p>
-</div>
-</div>
-<div class="bg-surface-container-low p-8 rounded-xl flex justify-between items-center group cursor-default transition-colors">
-<div>
-<h4 class="font-bold">iPhone 16e</h4>
-<p class="text-sm text-on-surface-variant">Lo esencial, refinado. Desde USD 599</p>
-</div>
-</div>
-</div>
-</div>
-<!-- Full Price Grid -->
-<div class="mt-12 bg-surface-container-lowest rounded-xl p-8 overflow-x-auto">
-<table class="w-full text-left">
-<thead>
-<tr class="text-on-surface-variant text-sm border-b border-outline-variant/10">
-<th class="py-4 font-medium">Modelo</th>
-<th class="py-4 font-medium">Almacenamiento</th>
-<th class="py-4 font-medium">Precio Inicial</th>
-<th class="py-4 font-medium text-right">Acción</th>
-</tr>
-</thead>
-<tbody class="divide-y divide-outline-variant/5" data-cms-list="iphone.priceTable">
-<tr class="hover:bg-surface-container-low transition-colors group">
-<td class="py-6 font-bold">iPhone 17 Pro Max</td>
-<td class="py-6">256GB - 2TB</td>
-<td class="py-6">USD 1.199</td>
-<td class="py-6 text-right"><button class="bg-on-surface text-background px-4 py-1.5 rounded-full text-xs font-bold">Configurar</button></td>
-</tr>
-<tr class="hover:bg-surface-container-low transition-colors group">
-<td class="py-6 font-bold">iPhone 15</td>
-<td class="py-6">128GB - 512GB</td>
-<td class="py-6">USD 699</td>
-<td class="py-6 text-right"><button class="bg-on-surface text-background px-4 py-1.5 rounded-full text-xs font-bold">Configurar</button></td>
-</tr>
-<tr class="hover:bg-surface-container-low transition-colors group">
-<td class="py-6 font-bold">iPhone 14</td>
-<td class="py-6">128GB - 512GB</td>
-<td class="py-6">USD 599</td>
-<td class="py-6 text-right"><button class="bg-on-surface text-background px-4 py-1.5 rounded-full text-xs font-bold">Configurar</button></td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
-<!-- iPads & MacBooks: Bento Grid -->
-<section class="py-24 bg-surface-container-low">
-<div class="max-w-[1440px] mx-auto px-12">
-<div class="grid grid-cols-1 md:grid-cols-4 grid-rows-2 gap-4 h-auto md:h-[800px]">
-<!-- iPad Pro M5 -->
-<div class="md:col-span-2 md:row-span-2 bg-surface-container rounded-xl p-12 flex flex-col justify-between relative overflow-hidden group">
-<div>
-<span class="text-primary font-bold tracking-widest text-xs uppercase mb-2 block" data-cms="bento.ipadPro.badge">Lanzamiento</span>
-<h2 class="text-5xl font-bold tracking-tighter mb-4" data-cms="bento.ipadPro.name">iPad Pro M5</h2>
-<p class="text-on-surface-variant max-w-xs" data-cms="bento.ipadPro.tagline">La pantalla más avanzada del mundo se une a la potencia del chip M5. 11" y 13".</p>
-</div>
-<img alt="Tablet con pantalla líquida vibrante" class="absolute -bottom-20 -right-20 w-3/4 transform group-hover:-translate-y-5 transition-transform duration-700" data-cms-src="bento.ipadPro.image" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqnhZ4QQH26HQbtAZXGqA6GH3KdHYdYuFMni7W9vOiVXKdCVzWvgCy5-jWYdy2KTA8GjJN_piOEvLCGbZeBwCCHwPqqqWaQxy2XH5J7G471P144S9gdTXUZataxeGioR1JK3AD8wTcAe08ziZlqP-mtX5GomJ8hEQDnF__OuGuUAIv0YEQ3osDfhdIwPIE5IH4H1y9xsyXkJlYyzjIs5aAo0vgxRjgFic0646YRyf8SiRRFgVksdGiaiBKE0AqSre_nYKL9_b1j3w"/>
-</div>
-<!-- MacBook Pro M4/M5 -->
-<div class="md:col-span-2 bg-surface-container rounded-xl p-12 relative overflow-hidden flex flex-col justify-center">
-<h3 class="text-3xl font-bold mb-2" data-cms="bento.macbook.name">MacBook Pro</h3>
-<p class="text-on-surface-variant mb-6" data-cms="bento.macbook.tagline">Diseñada para los flujos de trabajo más exigentes.</p>
-<div class="flex gap-4" data-cms-list="bento.macbook.chips">
-<span class="bg-surface-variant/50 px-3 py-1 rounded text-xs">M4 Max</span>
-<span class="bg-surface-variant/50 px-3 py-1 rounded text-xs">Liquid XDR</span>
-</div>
-<img alt="Laptop abierta con acabado metálico" class="absolute top-1/2 -right-12 -translate-y-1/2 w-1/2 opacity-60" data-cms-src="bento.macbook.image" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDY04cKIAgSzEvQ7MJNWno3bt3x_qzlmbkfDn7SJacCMsCBodHZzdiuhehENKe7O8QMf40IKoBqq7ZSpKfCEeEiRHhbcS9hhABLkvPCDdKNvmAXwcQilJiXvjFjv49_NeA_bxZI01HEwPVI9X-efu6X4kpqddWsDc-bVcVbXhoy76xpnjkYDIC77tLo5NZYAP37zUg736KvrlCEDUd4mApEvq4Zb_9Ev8g093JRgBwwg-Bk6EPVMUWX-yawEg8LbSitlnmDHWSsTig"/>
-</div>
-<!-- iMac & Mac Mini -->
-<div class="bg-surface-container rounded-xl p-8 flex flex-col justify-between">
-<h4 class="text-xl font-bold" data-cms="bento.imac.name">iMac M4</h4>
-<p class="text-on-surface-variant text-sm" data-cms="bento.imac.tagline">Colores como nunca viste.</p>
-<button class="w-10 h-10 rounded-full border border-outline-variant flex items-center justify-center">
-<span class="material-symbols-outlined text-sm">add</span>
-</button>
-</div>
-<div class="bg-surface-container rounded-xl p-8 flex flex-col justify-between">
-<h4 class="text-xl font-bold" data-cms="bento.macStudio.name">Mac Studio</h4>
-<p class="text-on-surface-variant text-sm" data-cms="bento.macStudio.tagline">La bestia en una caja.</p>
-<button class="w-10 h-10 rounded-full border border-outline-variant flex items-center justify-center">
-<span class="material-symbols-outlined text-sm">add</span>
-</button>
-</div>
-</div>
-</div>
-</section>
-<!-- Accessories & Ecosystem -->
-<section class="py-24 px-12 max-w-[1440px] mx-auto">
-<div class="flex items-end justify-between mb-12">
-<div>
-<span class="label-md tracking-[0.2em] text-primary mb-4 block" data-cms="accessories.sectionLabel">ESENCIALES</span>
-<h2 class="text-4xl font-bold tracking-tight" data-cms="accessories.sectionTitle">Wearables y Audio.</h2>
-</div>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-6" data-cms-list="accessories.products">
-<!-- Watch Series 11 -->
-<div class="bg-surface-container rounded-xl p-1 w-full group">
-<div class="bg-surface-dim rounded-[calc(0.75rem-1px)] p-8 h-full">
-<div class="h-64 flex items-center justify-center mb-8">
-<img alt="Smartwatch con malla metálica" class="h-full object-contain group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8Q83KSC3f0yZy9hH5wsaWO1E46VwhXRkl9n-1_N1Ht_Y821L8YkLjwNdtX_i7fMedo_5_Z2P1jj5Ij1ZcIeKSS_eglNvGduvVt9_WuE5PhmMy-V3o-cUoihjyzTNrRp5VzO4l1aLkQ0Ehc2Hoa-GWpX6S0awM5zt-_Ie-JoLCouk3nnlliY8NpbqHIhXcro7DQiVSPiqkLfh2mT3ok7i59cMibf1cZfzmmOhceM-OXA8WPFfRH5w-2OrQwKY3B1iafcNFMJtKvwA"/>
-</div>
-<h3 class="text-2xl font-bold">Watch Series 11</h3>
-<p class="text-on-surface-variant mt-2 mb-6">Más fino. Más rápido. Más inteligente.</p>
-<span class="text-xl font-mono">USD 399</span>
-</div>
-</div>
-<!-- AirPods Pro 3 -->
-<div class="bg-surface-container rounded-xl p-1 w-full group">
-<div class="bg-surface-dim rounded-[calc(0.75rem-1px)] p-8 h-full">
-<div class="h-64 flex items-center justify-center mb-8">
-<img alt="Estuche de auriculares inalámbricos blancos" class="h-full object-contain group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2gFxcFWRCyFRuIiykIDkwk1s12GsZoEZPLLM71g47L6E9hv18V34R-BaLkNv8zfPvsVd-ZU9XnxnEq4bJV8GBNxgA_JRfv2HCUlkwzI1yNd55dORH586d-ageR-rX_v777LDTA5aZgblHmIMr4ipeuPKxEYVTBZNsJY6tlNnhFIbAUu4EqAf3zJqrVHtHuVDCJbZNXrZrNqwb1fW26uZKVYUSm9OPleXUVmcnYKpyCgDwiEbIddv6UpLktB4y9fngCPFeY4tKyXg"/>
-</div>
-<h3 class="text-2xl font-bold">AirPods Pro 3</h3>
-<p class="text-on-surface-variant mt-2 mb-6">Audio Adaptativo 2.0.</p>
-<span class="text-xl font-mono">USD 249</span>
-</div>
-</div>
-<!-- AirPods Max -->
-<div class="bg-surface-container rounded-xl p-1 w-full group">
-<div class="bg-surface-dim rounded-[calc(0.75rem-1px)] p-8 h-full">
-<div class="h-64 flex items-center justify-center mb-8">
-<img alt="Auriculares supraaurales de alta gama" class="h-full object-contain group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuADI44KCxkWUkNgJq_8mvw9tu-NZfP9yUiM_iNocpdpumc5bsyQXSAtotn9uXS-R7tz-6cYFtAik"/>
-</div>
-<h3 class="text-2xl font-bold">AirPods Max</h3>
-<p class="text-on-surface-variant mt-2 mb-6">Sonido de Cine Personalizado.</p>
-<span class="text-xl font-mono">USD 549</span>
-</div>
-</div>
-</div>
-</section>
-<!-- Android & Gaming Section -->
-<section class="py-24 bg-surface-container-lowest">
-<div class="max-w-[1440px] mx-auto px-12">
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-<div>
-<span class="label-md tracking-[0.2em] text-primary mb-4 block" data-cms="ecosystem.sectionLabel">MÁS ALLÁ DE APPLE</span>
-<h2 class="text-4xl md:text-5xl font-bold tracking-tight mb-8" data-cms="ecosystem.sectionTitle">Ecosistema de Alto Rendimiento.</h2>
-<div class="space-y-8" data-cms-list="ecosystem.items">
-<div class="flex items-start gap-4">
-<div class="bg-surface-container-high p-3 rounded-lg"><span class="material-symbols-outlined text-primary">smartphone</span></div>
-<div>
-<h4 class="font-bold text-xl">Samsung Galaxy S25 Ultra</h4>
-<p class="text-on-surface-variant">El buque insignia absoluto de Android con visión de 200MP.</p>
-</div>
-</div>
-<div class="flex items-start gap-4">
-<div class="bg-surface-container-high p-3 rounded-lg"><span class="material-symbols-outlined text-primary">sports_score</span></div>
-<div>
-<h4 class="font-bold text-xl">Garmin Epix Gen 3</h4>
-<p class="text-on-surface-variant">Precisión multideporte inigualable para atletas de élite.</p>
-</div>
-</div>
-<div class="flex items-start gap-4">
-<div class="bg-surface-container-high p-3 rounded-lg"><span class="material-symbols-outlined text-primary">videogame_asset</span></div>
-<div>
-<h4 class="font-bold text-xl">Gaming Next-Gen</h4>
-<p class="text-on-surface-variant">PS5 Slim, Meta Quest 3S y Nintendo Switch 2.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="grid grid-cols-2 gap-4">
-<div class="bg-surface-container rounded-xl aspect-square p-8 overflow-hidden relative group">
-<img alt="Primer plano de joystick de consola de juegos" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:scale-110 transition-transform" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzH_x_hdT_jnVCo5vpWmKHFpeyirnHMelt1FdqMUeTO6LBmbWG9bjrAzbrlgJYxCITczLVz5c7NZD2tFFxuak74XKUTfxKvOveVHcl94E4a8PkYbPFBKst5Qh3Zbaiznhr927V6-8GxcuORQ-PPk-9XcgJaHtklZEFBd8Gv2NB4kD3aXqongk0TTjaue5yUTifofqH__5dHPZWxSM2p3KnzsH2yp_EOzEnbVAirRVit_S4HGwQ0TIzmhU9gIm0V-8ew9Lam8gaUFk"/>
-<span class="relative z-10 font-bold">PS5 Slim</span>
-</div>
-<div class="bg-surface-container rounded-xl aspect-square p-8 overflow-hidden relative group">
-<img alt="Pantalla de teléfono Android moderno" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:scale-110 transition-transform" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAX_D9bF1nKiOAiJnl99d_No7xnlAOwpN8wmyNXUo8nO7G8iKb4fGzC9X4BSOQTw7_m0Mu1ciIuCCIL2UAB6u3pFd_dis8sOWoAcFV12XeXdKh1vdzB_AeBUxuqnCKZTSogUXePgCfVZfPzD_9gBj_50x-Tcof0EYEES7_QRftfIodlMa54m3OL5hAZCS9zXJfR8lE6BlAZ3BtEE-smOjJvosTW4khiqsB0MFpZwr-WRmHtKsrbE2JV2XYlCsBtHz9YCtOGY6OgrVo"/>
-<span class="relative z-10 font-bold">S25 Ultra</span>
-</div>
-<div class="bg-surface-container rounded-xl aspect-square p-8 overflow-hidden relative group">
-<img alt="Vista frontal de casco VR" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:scale-110 transition-transform" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZrY6Yw8_YrRJOx41sTbUkHD9URw7qKgJaEUT6eS0UqXr2_A24fk8Sb5Rx98LMMPXDwIXGUdcKc3x3lfZNfXxTn35awe7MSJ2vHMReHjn3Wc9k8hgSfLD1WUhu6iLQEyZI3tdF2pMRTUVZU_3aEo3vpKEAFFzpNAlKJ8YhpcxwBEmxwftzNIdP0ZR5LZmmISRd3SeQlFn1VWtRbehpZX79Pjyr4Vtpa1Iigb6od1snZAwFESimqaFrFLXPhXWcuwiCn4hoW0SHTOs"/>
-<span class="relative z-10 font-bold">Quest 3S</span>
-</div>
-<div class="bg-surface-container rounded-xl aspect-square p-8 overflow-hidden relative group">
-<img alt="Pantalla de reloj deportivo" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:scale-110 transition-transform" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBM_Qhd1vZtAc19otVsnUaKNtQombBqm4iJ-m9sv2MjyYFxYSF2H-oSh3zPc32WavzVHxLi0yKgVr0-nodF45PuvuMrLyXNBkd9S0DGwruCdGWKXy_9pKbI2XoduhR2Z80XZOeWPcqjq3bA56N_xEpD9hEj3VF0nvSDLO7qkhautjgzmSw1JXnPQs3xH5jv5mKTiJFpocShyF2tpeDN1bxxJpAH2MgBXuyuuq-bmXWeFSY0pGx8GNFNTtmxbwcF6mE3yvV20Fal-o8"/>
-<span class="relative z-10 font-bold">Garmin Pro</span>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- Payment & Trust Section -->
+
+<!-- ── Secciones dinámicas (renderizadas por cms.js) ────────── -->
+<main id="dynamic-sections">
+  <!-- El contenido se inyecta desde Sanity.
+       Si no hay conexión al CMS, esta sección queda vacía. -->
+</main>
+
+<!-- ── Pagos y Logística ────────────────────────────────────── -->
 <section class="py-24 max-w-[1440px] mx-auto px-12 border-t border-outline-variant/10">
-<div class="grid grid-cols-1 md:grid-cols-2 gap-24">
-<div>
-<h2 class="text-3xl font-bold mb-6" data-cms="payment.title">Pagos y Logística.</h2>
-<p class="text-on-surface-variant mb-12" data-cms="payment.description">Soluciones flexibles tanto para particulares como para distribución mayorista. Pagos en pesos disponibles.</p>
-<div class="flex flex-wrap gap-4 mb-12" data-cms-list="payment.methods">
-<span class="px-6 py-3 bg-surface-container rounded-full border border-outline-variant/20 font-mono text-sm">Zelle</span>
-<span class="px-6 py-3 bg-surface-container rounded-full border border-outline-variant/20 font-mono text-sm">Payoneer</span>
-<span class="px-6 py-3 bg-surface-container rounded-full border border-outline-variant/20 font-mono text-sm">Wise</span>
-<span class="px-6 py-3 bg-primary-container text-on-primary-container rounded-full font-mono text-sm">USDT (TRC-20)</span>
-<span class="px-6 py-3 bg-surface-container rounded-full border border-outline-variant/20 font-mono text-sm">Transferencia</span>
-</div>
-<div class="bg-surface-container p-8 rounded-xl flex items-center gap-6">
-<span class="material-symbols-outlined text-4xl text-primary">local_shipping</span>
-<div>
-<h4 class="font-bold" data-cms="payment.shippingTitle">Envíos sin cargo CABA</h4>
-<p class="text-sm text-on-surface-variant" data-cms="payment.shippingDescription">Entrega en el día dentro de Capital Federal. Manipulación segura garantizada.</p>
-</div>
-</div>
-</div>
-<div class="bg-surface-container-high rounded-2xl p-12">
-<h3 class="text-2xl font-bold mb-8">Distribución B2B</h3>
-<form class="space-y-6">
-<div>
-<label class="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2">Nombre de la Empresa</label>
-<input class="w-full bg-surface-container-lowest border border-outline-variant/20 rounded-lg p-3 focus:outline-none focus:ring-1 focus:ring-primary transition-all" type="text"/>
-</div>
-<div>
-<label class="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2">Mensaje / Pedido por Volumen</label>
-<textarea class="w-full bg-surface-container-lowest border border-outline-variant/20 rounded-lg p-3 h-32 focus:outline-none focus:ring-1 focus:ring-primary transition-all"></textarea>
-</div>
-<button class="w-full bg-on-surface text-background py-4 rounded-lg font-bold hover:bg-on-surface/90 transition-all active:scale-95">Enviar Consulta</button>
-<p class="text-center text-xs text-on-surface-variant mt-4" data-cms="payment.warrantyText">Todo el hardware incluye garantía de 1 año global.</p>
-</form>
-</div>
-</div>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-24">
+    <div>
+      <h2 class="text-3xl font-bold mb-6" data-cms="payment.title">Pagos y Logística.</h2>
+      <p class="text-on-surface-variant mb-12" data-cms="payment.description">
+        Soluciones flexibles tanto para particulares como para distribución mayorista. Pagos en pesos disponibles.
+      </p>
+      <div class="flex flex-wrap gap-4 mb-12" data-cms-list="payment.methods">
+        <span class="px-6 py-3 bg-surface-container rounded-full border border-outline-variant/20 font-mono text-sm">Zelle</span>
+        <span class="px-6 py-3 bg-surface-container rounded-full border border-outline-variant/20 font-mono text-sm">Payoneer</span>
+        <span class="px-6 py-3 bg-surface-container rounded-full border border-outline-variant/20 font-mono text-sm">Wise</span>
+        <span class="px-6 py-3 bg-primary-container text-on-primary-container rounded-full font-mono text-sm">USDT (TRC-20)</span>
+        <span class="px-6 py-3 bg-surface-container rounded-full border border-outline-variant/20 font-mono text-sm">Transferencia</span>
+      </div>
+      <div class="bg-surface-container p-8 rounded-xl flex items-center gap-6">
+        <span class="material-symbols-outlined text-4xl text-primary">local_shipping</span>
+        <div>
+          <h4 class="font-bold" data-cms="payment.shippingTitle">Envíos sin cargo CABA</h4>
+          <p class="text-sm text-on-surface-variant" data-cms="payment.shippingDescription">
+            Entrega en el día dentro de Capital Federal. Manipulación segura garantizada.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="bg-surface-container-high rounded-2xl p-12">
+      <h3 class="text-2xl font-bold mb-8">Distribución B2B</h3>
+      <form class="space-y-6">
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2">
+            Nombre de la Empresa
+          </label>
+          <input
+            class="w-full bg-surface-container-lowest border border-outline-variant/20 rounded-lg p-3 focus:outline-none focus:ring-1 focus:ring-primary transition-all"
+            type="text"/>
+        </div>
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2">
+            Mensaje / Pedido por Volumen
+          </label>
+          <textarea
+            class="w-full bg-surface-container-lowest border border-outline-variant/20 rounded-lg p-3 h-32 focus:outline-none focus:ring-1 focus:ring-primary transition-all">
+          </textarea>
+        </div>
+        <button class="w-full bg-on-surface text-background py-4 rounded-lg font-bold hover:bg-on-surface/90 transition-all active:scale-95">
+          Enviar Consulta
+        </button>
+        <p class="text-center text-xs text-on-surface-variant mt-4" data-cms="payment.warrantyText">
+          Todo el hardware incluye garantía de 1 año global.
+        </p>
+      </form>
+    </div>
+  </div>
 </section>
-<!-- Footer -->
+
+<!-- ── Footer ───────────────────────────────────────────────── -->
 <footer class="bg-[#131313] w-full pt-24 pb-12 border-t border-[#e2e2e2]/10">
-<div class="max-w-[1440px] mx-auto px-12 text-center">
-<div class="text-3xl font-black text-[#e2e2e2] mb-6" data-cms="site.brandName">Luxstore</div>
-<p class="text-on-surface-variant text-sm max-w-xl mx-auto mb-8" data-cms="site.footerTagline">Distribución tech premium para la era digital. Importamos el hardware más innovador del mundo para entusiastas y empresas locales.</p>
-<div class="flex justify-center gap-8 mb-12">
-<span class="material-symbols-outlined text-on-surface-variant cursor-default">language</span>
-<span class="material-symbols-outlined text-on-surface-variant cursor-default">share</span>
-<span class="material-symbols-outlined text-on-surface-variant cursor-default">verified_user</span>
-</div>
-<div class="pt-8 border-t border-outline-variant/10">
-<p class="font-['Inter'] text-sm tracking-wide text-[#e2e2e2]/40" data-cms="site.footerCopyright">© 2024 Luxstore Distribución Tech Premium. Todos los derechos reservados.</p>
-</div>
-</div>
+  <div class="max-w-[1440px] mx-auto px-12 text-center">
+    <div class="text-3xl font-black text-[#e2e2e2] mb-6" data-cms="site.brandName">Luxstore</div>
+    <p class="text-on-surface-variant text-sm max-w-xl mx-auto mb-8" data-cms="site.footerTagline">
+      Distribución tech premium para la era digital. Importamos el hardware más innovador del mundo para entusiastas y empresas locales.
+    </p>
+    <div class="flex justify-center gap-8 mb-12">
+      <span class="material-symbols-outlined text-on-surface-variant cursor-default">language</span>
+      <span class="material-symbols-outlined text-on-surface-variant cursor-default">share</span>
+      <span class="material-symbols-outlined text-on-surface-variant cursor-default">verified_user</span>
+    </div>
+    <div class="pt-8 border-t border-outline-variant/10">
+      <p class="font-['Inter'] text-sm tracking-wide text-[#e2e2e2]/40" data-cms="site.footerCopyright">
+        © 2025 Luxstore Distribución Tech Premium. Todos los derechos reservados.
+      </p>
+    </div>
+  </div>
 </footer>
-</body></html>
+
+</body>
+</html>

@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "Static HTML Server",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "-p", "3000", "/Users/andressentis/Library/CloudStorage/GoogleDrive-andy@ander.agency/Mi unidad/Proyectos AA/Claude Experiments/tech-onepage"],
+      "port": 3000
+    }
+  ]
+}

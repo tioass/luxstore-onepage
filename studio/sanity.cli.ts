@@ -5,4 +5,5 @@ export default defineCliConfig({
     projectId: 'syny9o6g',
     dataset: 'production',
   },
+  studioHost: 'luxtore',
 })

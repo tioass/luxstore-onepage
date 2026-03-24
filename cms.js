@@ -15,17 +15,20 @@ const QUERY = `{
     headline, subheadline, ctaPrimary, ctaSecondary,
     "backgroundImage": backgroundImage.asset->url
   },
-  "sections": *[_type == "section"] | order(order asc) {
+  "categories": *[_type == "category"] | order(order asc) {
+    _id,
     title,
     sectionLabel,
-    "products": products[]->{
-      name,
-      tagline,
-      startingPrice,
-      features,
-      chips,
-      "image": image.asset->url
-    }
+    order
+  },
+  "products": *[_type == "product"] | order(order asc) {
+    name,
+    tagline,
+    startingPrice,
+    features,
+    chips,
+    "image": image.asset->url,
+    "categoryId": category._ref
   },
   "payment": *[_type == "paymentSection" && _id == "paymentSection"][0]{
     title, description,
@@ -48,168 +51,31 @@ const MOCK_DATA = {
     ctaSecondary: 'Ver más',
     backgroundImage: 'https://lh3.googleusercontent.com/aida-public/AB6AXuC2zDw6kJhHqiBtbJcuMWyA1OfIPMDFxEeOKZ6qVBBEhdkGNs7mC8Md84Sguzc6Tt00qT4Zkf4zNQT7nFUbc-EXe5tTJJ8hb3FNmZ8RGiLIfrxiqm8RvVmtCpSSo3s30kHsrslpPbHaGzriwVlX9qveVVINBhbCi_nserKz1NcZewaCh6oYBtsk2Hz89o3wF1bfxTw9YuA096JMmG-Vwfszwv220Tip7iYdYrl7dT87Rb84xfrrndk1NBwGdd6YHYRMBJEl7q6h2uk',
   },
-  sections: [
-    {
-      title: 'iPhone.',
-      sectionLabel: 'LA LÍNEA',
-      products: [
-        {
-          name: 'iPhone 17 Pro',
-          tagline: 'El máximo rendimiento. Titanio y chip A19 Pro.',
-          startingPrice: 999,
-          features: ['Chip A19 Pro', 'Acabado en Titanio', 'Teleobjetivo Periscópico 48MP'],
-          image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuD9_QfbKLqBdNLf3EHEqiaattsjqZLoTeW8hoQS6KXe_hEU0vwwnKWadHIXhmoCBGyqmv3S5FSSH19LPNtFQg9Yr0stZPsdSoGs33-VU1HxeXKwNeMgHKP3wybEiTrPejw9bj_NoThjRklCdyKk1FL4CGsQa3lFkjqlf6s_1Z7fzmy6plDPn2qT1xG2Wtjpkw0DMKKWj4tln5NkmjMYyYgEJReJUfPdjt55MkVAdIBCbIfoygZQmPDCwNelayNki33GNJfU65gdmA0',
-        },
-        {
-          name: 'iPhone 17 Air',
-          tagline: 'El más delgado de la historia.',
-          startingPrice: 899,
-          image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuD9_QfbKLqBdNLf3EHEqiaattsjqZLoTeW8hoQS6KXe_hEU0vwwnKWadHIXhmoCBGyqmv3S5FSSH19LPNtFQg9Yr0stZPsdSoGs33-VU1HxeXKwNeMgHKP3wybEiTrPejw9bj_NoThjRklCdyKk1FL4CGsQa3lFkjqlf6s_1Z7fzmy6plDPn2qT1xG2Wtjpkw0DMKKWj4tln5NkmjMYyYgEJReJUfPdjt55MkVAdIBCbIfoygZQmPDCwNelayNki33GNJfU65gdmA0',
-        },
-        {
-          name: 'iPhone 16 Pro Max',
-          tagline: 'El poder del 16.',
-          startingPrice: 1099,
-          image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuD9_QfbKLqBdNLf3EHEqiaattsjqZLoTeW8hoQS6KXe_hEU0vwwnKWadHIXhmoCBGyqmv3S5FSSH19LPNtFQg9Yr0stZPsdSoGs33-VU1HxeXKwNeMgHKP3wybEiTrPejw9bj_NoThjRklCdyKk1FL4CGsQa3lFkjqlf6s_1Z7fzmy6plDPn2qT1xG2Wtjpkw0DMKKWj4tln5NkmjMYyYgEJReJUfPdjt55MkVAdIBCbIfoygZQmPDCwNelayNki33GNJfU65gdmA0',
-        },
-        {
-          name: 'iPhone 16e',
-          tagline: 'Lo esencial, refinado.',
-          startingPrice: 599,
-          image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuD9_QfbKLqBdNLf3EHEqiaattsjqZLoTeW8hoQS6KXe_hEU0vwwnKWadHIXhmoCBGyqmv3S5FSSH19LPNtFQg9Yr0stZPsdSoGs33-VU1HxeXKwNeMgHKP3wybEiTrPejw9bj_NoThjRklCdyKk1FL4CGsQa3lFkjqlf6s_1Z7fzmy6plDPn2qT1xG2Wtjpkw0DMKKWj4tln5NkmjMYyYgEJReJUfPdjt55MkVAdIBCbIfoygZQmPDCwNelayNki33GNJfU65gdmA0',
-        },
-        {
-          name: 'iPhone 15',
-          tagline: 'Clásico que nunca falla.',
-          startingPrice: 699,
-          image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuD9_QfbKLqBdNLf3EHEqiaattsjqZLoTeW8hoQS6KXe_hEU0vwwnKWadHIXhmoCBGyqmv3S5FSSH19LPNtFQg9Yr0stZPsdSoGs33-VU1HxeXKwNeMgHKP3wybEiTrPejw9bj_NoThjRklCdyKk1FL4CGsQa3lFkjqlf6s_1Z7fzmy6plDPn2qT1xG2Wtjpkw0DMKKWj4tln5NkmjMYyYgEJReJUfPdjt55MkVAdIBCbIfoygZQmPDCwNelayNki33GNJfU65gdmA0',
-        },
-        {
-          name: 'iPhone 14',
-          tagline: 'Potencia probada, precio imbatible.',
-          startingPrice: 549,
-          image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuD9_QfbKLqBdNLf3EHEqiaattsjqZLoTeW8hoQS6KXe_hEU0vwwnKWadHIXhmoCBGyqmv3S5FSSH19LPNtFQg9Yr0stZPsdSoGs33-VU1HxeXKwNeMgHKP3wybEiTrPejw9bj_NoThjRklCdyKk1FL4CGsQa3lFkjqlf6s_1Z7fzmy6plDPn2qT1xG2Wtjpkw0DMKKWj4tln5NkmjMYyYgEJReJUfPdjt55MkVAdIBCbIfoygZQmPDCwNelayNki33GNJfU65gdmA0',
-        },
-        {
-          name: 'iPhone 13',
-          tagline: 'El que todos quieren. Siempre disponible.',
-          startingPrice: 449,
-          image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuD9_QfbKLqBdNLf3EHEqiaattsjqZLoTeW8hoQS6KXe_hEU0vwwnKWadHIXhmoCBGyqmv3S5FSSH19LPNtFQg9Yr0stZPsdSoGs33-VU1HxeXKwNeMgHKP3wybEiTrPejw9bj_NoThjRklCdyKk1FL4CGsQa3lFkjqlf6s_1Z7fzmy6plDPn2qT1xG2Wtjpkw0DMKKWj4tln5NkmjMYyYgEJReJUfPdjt55MkVAdIBCbIfoygZQmPDCwNelayNki33GNJfU65gdmA0',
-        },
-        {
-          name: 'iPhone SE (3ra gen)',
-          tagline: 'El más compacto. Con chip A15 Bionic.',
-          startingPrice: 349,
-          image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuD9_QfbKLqBdNLf3EHEqiaattsjqZLoTeW8hoQS6KXe_hEU0vwwnKWadHIXhmoCBGyqmv3S5FSSH19LPNtFQg9Yr0stZPsdSoGs33-VU1HxeXKwNeMgHKP3wybEiTrPejw9bj_NoThjRklCdyKk1FL4CGsQa3lFkjqlf6s_1Z7fzmy6plDPn2qT1xG2Wtjpkw0DMKKWj4tln5NkmjMYyYgEJReJUfPdjt55MkVAdIBCbIfoygZQmPDCwNelayNki33GNJfU65gdmA0',
-        },
-      ],
-    },
-    {
-      title: 'iPad.',
-      sectionLabel: 'LANZAMIENTO',
-      products: [
-        {
-          name: 'iPad Pro M5',
-          tagline: 'La pantalla más avanzada del mundo con el chip M5. Disponible en 11" y 13".',
-          startingPrice: 1099,
-          features: ['Chip M5', 'Pantalla OLED Ultra Retina XDR', 'Apple Pencil Pro compatible'],
-          image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBqnhZ4QQH26HQbtAZXGqA6GH3KdHYdYuFMni7W9vOiVXKdCVzWvgCy5-jWYdy2KTA8GjJN_piOEvLCGbZeBwCCHwPqqqWaQxy2XH5J7G471P144S9gdTXUZataxeGioR1JK3AD8wTcAe08ziZlqP-mtX5GomJ8hEQDnF__OuGuUAIv0YEQ3osDfhdIwPIE5IH4H1y9xsyXkJlYyzjIs5aAo0vgxRjgFic0646YRyf8SiRRFgVksdGiaiBKE0AqSre_nYKL9_b1j3w',
-        },
-        {
-          name: 'iPad Air M3',
-          tagline: 'Potencia y portabilidad en perfecta armonía.',
-          startingPrice: 799,
-          image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBqnhZ4QQH26HQbtAZXGqA6GH3KdHYdYuFMni7W9vOiVXKdCVzWvgCy5-jWYdy2KTA8GjJN_piOEvLCGbZeBwCCHwPqqqWaQxy2XH5J7G471P144S9gdTXUZataxeGioR1JK3AD8wTcAe08ziZlqP-mtX5GomJ8hEQDnF__OuGuUAIv0YEQ3osDfhdIwPIE5IH4H1y9xsyXkJlYyzjIs5aAo0vgxRjgFic0646YRyf8SiRRFgVksdGiaiBKE0AqSre_nYKL9_b1j3w',
-        },
-        {
-          name: 'iPad mini 7',
-          tagline: 'Todo el poder en el tamaño más compacto.',
-          startingPrice: 499,
-          image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBqnhZ4QQH26HQbtAZXGqA6GH3KdHYdYuFMni7W9vOiVXKdCVzWvgCy5-jWYdy2KTA8GjJN_piOEvLCGbZeBwCCHwPqqqWaQxy2XH5J7G471P144S9gdTXUZataxeGioR1JK3AD8wTcAe08ziZlqP-mtX5GomJ8hEQDnF__OuGuUAIv0YEQ3osDfhdIwPIE5IH4H1y9xsyXkJlYyzjIs5aAo0vgxRjgFic0646YRyf8SiRRFgVksdGiaiBKE0AqSre_nYKL9_b1j3w',
-        },
-      ],
-    },
-    {
-      title: 'Mac.',
-      sectionLabel: 'ESTACIÓN DE TRABAJO',
-      products: [
-        {
-          name: 'MacBook Pro M4 Max',
-          tagline: 'Diseñada para los flujos de trabajo más exigentes.',
-          startingPrice: 1999,
-          features: ['Chip M4 Max', 'Pantalla Liquid XDR', 'Hasta 128GB RAM unificada'],
-          image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDY04cKIAgSzEvQ7MJNWno3bt3x_qzlmbkfDn7SJacCMsCBodHZzdiuhehENKe7O8QMf40IKoBqq7ZSpKfCEeEiRHhbcS9hhABLkvPCDdKNvmAXwcQilJiXvjFjv49_NeA_bxZI01HEwPVI9X-efu6X4kpqddWsDc-bVcVbXhoy76xpnjkYDIC77tLo5NZYAP37zUg736KvrlCEDUd4mApEvq4Zb_9Ev8g093JRgBwwg-Bk6EPVMUWX-yawEg8LbSitlnmDHWSsTig',
-        },
-        {
-          name: 'Mac Studio M4 Ultra',
-          tagline: 'La bestia en una caja.',
-          startingPrice: 1999,
-          image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDY04cKIAgSzEvQ7MJNWno3bt3x_qzlmbkfDn7SJacCMsCBodHZzdiuhehENKe7O8QMf40IKoBqq7ZSpKfCEeEiRHhbcS9hhABLkvPCDdKNvmAXwcQilJiXvjFjv49_NeA_bxZI01HEwPVI9X-efu6X4kpqddWsDc-bVcVbXhoy76xpnjkYDIC77tLo5NZYAP37zUg736KvrlCEDUd4mApEvq4Zb_9Ev8g093JRgBwwg-Bk6EPVMUWX-yawEg8LbSitlnmDHWSsTig',
-        },
-        {
-          name: 'iMac M4',
-          tagline: 'Colores como nunca viste.',
-          startingPrice: 1299,
-          image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDY04cKIAgSzEvQ7MJNWno3bt3x_qzlmbkfDn7SJacCMsCBodHZzdiuhehENKe7O8QMf40IKoBqq7ZSpKfCEeEiRHhbcS9hhABLkvPCDdKNvmAXwcQilJiXvjFjv49_NeA_bxZI01HEwPVI9X-efu6X4kpqddWsDc-bVcVbXhoy76xpnjkYDIC77tLo5NZYAP37zUg736KvrlCEDUd4mApEvq4Zb_9Ev8g093JRgBwwg-Bk6EPVMUWX-yawEg8LbSitlnmDHWSsTig',
-        },
-        {
-          name: 'MacBook Air M3',
-          tagline: 'Increíblemente delgado. Sorprendentemente potente.',
-          startingPrice: 1099,
-          image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDY04cKIAgSzEvQ7MJNWno3bt3x_qzlmbkfDn7SJacCMsCBodHZzdiuhehENKe7O8QMf40IKoBqq7ZSpKfCEeEiRHhbcS9hhABLkvPCDdKNvmAXwcQilJiXvjFjv49_NeA_bxZI01HEwPVI9X-efu6X4kpqddWsDc-bVcVbXhoy76xpnjkYDIC77tLo5NZYAP37zUg736KvrlCEDUd4mApEvq4Zb_9Ev8g093JRgBwwg-Bk6EPVMUWX-yawEg8LbSitlnmDHWSsTig',
-        },
-      ],
-    },
-    {
-      title: 'Wearables y Audio.',
-      sectionLabel: 'ESENCIALES',
-      products: [
-        {
-          name: 'Apple Watch Series 11',
-          tagline: 'Más fino. Más rápido. Más inteligente.',
-          startingPrice: 399,
-          features: ['Pantalla Always-On 2x más brillante', 'Detección de crash', 'Temperatura corporal'],
-          image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuC8Q83KSC3f0yZy9hH5wsaWO1E46VwhXRkl9n-1_N1Ht_Y821L8YkLjwNdtX_i7fMedo_5_Z2P1jj5Ij1ZcIeKSS_eglNvGduvVt9_WuE5PhmMy-V3o-cUoihjyzTNrRp5VzO4l1aLkQ0Ehc2Hoa-GWpX6S0awM5zt-_Ie-JoLCouk3nnlliY8NpbqHIhXcro7DQiVSPiqkLfh2mT3ok7i59cMibf1cZfzmmOhceM-OXA8WPFfRH5w-2OrQwKY3B1iafcNFMJtKvwA',
-        },
-        {
-          name: 'AirPods Pro 3',
-          tagline: 'Audio Adaptativo 2.0.',
-          startingPrice: 249,
-          image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuB2gFxcFWRCyFRuIiykIDkwk1s12GsZoEZPLLM71g47L6E9hv18V34R-BaLkNv8zfPvsVd-ZU9XnxnEq4bJV8GBNxgA_JRfv2HCUlkwzI1yNd55dORH586d-ageR-rX_v777LDTA5aZgblHmIMr4ipeuPKxEYVTBZNsJY6tlNnhFIbAUu4EqAf3zJqrVHtHuVDCJbZNXrZrNqwb1fW26uZKVYUSm9OPleXUVmcnYKpyCgDwiEbIddv6UpLktB4y9fngCPFeY4tKyXg',
-        },
-        {
-          name: 'AirPods Max',
-          tagline: 'Sonido de Cine Personalizado.',
-          startingPrice: 549,
-          image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuADI44KCxkWUkNgJq_8mvw9tu-NZfP9yUiM_iNocpdpumc5bsyQXSAtotn9uXS-R7tz-6cYFtAik',
-        },
-      ],
-    },
-    {
-      title: 'Gaming.',
-      sectionLabel: 'NEXT-GEN',
-      products: [
-        {
-          name: 'PlayStation 5 Slim',
-          tagline: 'La consola más potente de Sony, ahora más compacta.',
-          startingPrice: 499,
-          features: ['SSD ultrarrápido', 'Ray tracing en tiempo real', '4K a 120fps'],
-          image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCzH_x_hdT_jnVCo5vpWmKHFpeyirnHMelt1FdqMUeTO6LBmbWG9bjrAzbrlgJYxCITczLVz5c7NZD2tFFxuak74XKUTfxKvOveVHcl94E4a8PkYbPFBKst5Qh3Zbaiznhr927V6-8GxcuORQ-PPk-9XcgJaHtklZEFBd8Gv2NB4kD3aXqongk0TTjaue5yUTifofqH__5dHPZWxSM2p3KnzsH2yp_EOzEnbVAirRVit_S4HGwQ0TIzmhU9gIm0V-8ew9Lam8gaUFk',
-        },
-        {
-          name: 'Meta Quest 3S',
-          tagline: 'Realidad mixta al alcance de todos.',
-          startingPrice: 299,
-          image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCZrY6Yw8_YrRJOx41sTbUkHD9URw7qKgJaEUT6eS0UqXr2_A24fk8Sb5Rx98LMMPXDwIXGUdcKc3x3lfZNfXxTn35awe7MSJ2vHMReHjn3Wc9k8hgSfLD1WUhu6iLQEyZI3tdF2pMRTUVZU_3aEo3vpKEAFFzpNAlKJ8YhpcxwBEmxwftzNIdP0ZR5LZmmISRd3SeQlFn1VWtRbehpZX79Pjyr4Vtpa1Iigb6od1snZAwFESimqaFrFLXPhXWcuwiCn4hoW0SHTOs',
-        },
-        {
-          name: 'Nintendo Switch 2',
-          tagline: 'La nueva era del juego portátil.',
-          startingPrice: 449,
-          image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCzH_x_hdT_jnVCo5vpWmKHFpeyirnHMelt1FdqMUeTO6LBmbWG9bjrAzbrlgJYxCITczLVz5c7NZD2tFFxuak74XKUTfxKvOveVHcl94E4a8PkYbPFBKst5Qh3Zbaiznhr927V6-8GxcuORQ-PPk-9XcgJaHtklZEFBd8Gv2NB4kD3aXqongk0TTjaue5yUTifofqH__5dHPZWxSM2p3KnzsH2yp_EOzEnbVAirRVit_S4HGwQ0TIzmhU9gIm0V-8ew9Lam8gaUFk',
-        },
-      ],
-    },
+  categories: [
+    { _id: 'cat-iphone',   title: 'iPhone.',            sectionLabel: 'LA LÍNEA',            order: 1 },
+    { _id: 'cat-ipad',     title: 'iPad.',              sectionLabel: 'LANZAMIENTO',         order: 2 },
+    { _id: 'cat-mac',      title: 'Mac.',               sectionLabel: 'ESTACIÓN DE TRABAJO', order: 3 },
+    { _id: 'cat-wearable', title: 'Wearables y Audio.', sectionLabel: 'ESENCIALES',          order: 4 },
+    { _id: 'cat-gaming',   title: 'Gaming.',            sectionLabel: 'NEXT-GEN',            order: 5 },
+  ],
+  products: [
+    { categoryId: 'cat-iphone', name: 'iPhone 17 Pro',       tagline: 'El máximo rendimiento. Titanio y chip A19 Pro.', startingPrice: 999, features: ['Chip A19 Pro', 'Acabado en Titanio', 'Teleobjetivo Periscópico 48MP'], image: null },
+    { categoryId: 'cat-iphone', name: 'iPhone 17 Air',       tagline: 'El más delgado de la historia.',                 startingPrice: 899, image: null },
+    { categoryId: 'cat-iphone', name: 'iPhone 16 Pro Max',   tagline: 'El poder del 16.',                               startingPrice: 1099, image: null },
+    { categoryId: 'cat-iphone', name: 'iPhone 16e',          tagline: 'Lo esencial, refinado.',                          startingPrice: 599, image: null },
+    { categoryId: 'cat-ipad',   name: 'iPad Pro M5',         tagline: 'La pantalla más avanzada del mundo.',             startingPrice: 1099, features: ['Chip M5', 'OLED Ultra Retina XDR', 'Apple Pencil Pro'], image: null },
+    { categoryId: 'cat-ipad',   name: 'iPad Air M3',         tagline: 'Potencia y portabilidad en perfecta armonía.',    startingPrice: 799, image: null },
+    { categoryId: 'cat-ipad',   name: 'iPad mini 7',         tagline: 'Todo el poder en el tamaño más compacto.',        startingPrice: 499, image: null },
+    { categoryId: 'cat-mac',    name: 'MacBook Pro M4 Max',  tagline: 'Para los flujos de trabajo más exigentes.',       startingPrice: 1999, features: ['Chip M4 Max', 'Pantalla Liquid XDR', 'Hasta 128GB RAM'], image: null },
+    { categoryId: 'cat-mac',    name: 'Mac Studio M4 Ultra', tagline: 'La bestia en una caja.',                          startingPrice: 1999, image: null },
+    { categoryId: 'cat-mac',    name: 'iMac M4',             tagline: 'Colores como nunca viste.',                        startingPrice: 1299, image: null },
+    { categoryId: 'cat-mac',    name: 'MacBook Air M3',      tagline: 'Increíblemente delgado. Sorprendentemente potente.', startingPrice: 1099, image: null },
+    { categoryId: 'cat-wearable', name: 'Apple Watch Series 11', tagline: 'Más fino. Más rápido. Más inteligente.',      startingPrice: 399, features: ['Always-On 2x más brillante', 'Detección de crash', 'Temperatura corporal'], image: null },
+    { categoryId: 'cat-wearable', name: 'AirPods Pro 3',     tagline: 'Audio Adaptativo 2.0.',                           startingPrice: 249, image: null },
+    { categoryId: 'cat-wearable', name: 'AirPods Max',       tagline: 'Sonido de Cine Personalizado.',                   startingPrice: 549, image: null },
+    { categoryId: 'cat-gaming',   name: 'PlayStation 5 Slim', tagline: 'La consola más potente, ahora más compacta.',     startingPrice: 499, features: ['SSD ultrarrápido', 'Ray tracing', '4K a 120fps'], image: null },
+    { categoryId: 'cat-gaming',   name: 'Meta Quest 3S',     tagline: 'Realidad mixta al alcance de todos.',             startingPrice: 299, image: null },
+    { categoryId: 'cat-gaming',   name: 'Nintendo Switch 2',  tagline: 'La nueva era del juego portátil.',               startingPrice: 449, image: null },
   ],
   payment: {
     title: 'Pagos y Logística.',
@@ -394,46 +260,65 @@ function renderPaymentMethods(methods) {
 
 // ── Main ──────────────────────────────────────────────────────
 async function init() {
+  console.log('[CMS] init() arrancó')
   if (SANITY_PROJECT_ID === 'TU_PROJECT_ID') {
-    console.info('[CMS] Project ID no configurado. Mostrando contenido estático.')
+    console.info('[CMS] Project ID no configurado.')
     return
   }
 
   let data
   try {
+    console.log('[CMS] Fetching desde Sanity...')
     data = await fetchCMS()
+    console.log('[CMS] Data recibida:', Object.keys(data))
   } catch (err) {
-    console.warn('[CMS] No se pudo cargar el contenido:', err.message)
+    console.warn('[CMS] Error fetch:', err.message)
     return
   }
 
-  const { site, hero, sections, payment } = data
+  const { site, hero, categories, products, payment } = data
 
-  // ─ Site
+  // Agrupar productos por categoría
+  const sections = (categories ?? []).map(cat => ({
+    title: cat.title,
+    sectionLabel: cat.sectionLabel,
+    products: (products ?? []).filter(p => p.categoryId === cat._id),
+  }))
+  console.log('[CMS] Categorías:', categories?.length, '| Productos:', products?.length, '| Hero:', hero?.headline)
+
   setText('site.brandName',       site?.brandName)
   setText('site.footerTagline',   site?.footerTagline)
   setText('site.footerCopyright', site?.footerCopyright)
 
-  // ─ Hero
   setText ('hero.headline',        hero?.headline)
   setText ('hero.subheadline',     hero?.subheadline)
   setText ('hero.ctaPrimary',      hero?.ctaPrimary)
   setText ('hero.ctaSecondary',    hero?.ctaSecondary)
   setImage('hero.backgroundImage', hero?.backgroundImage)
 
-  // ─ Secciones dinámicas
   const container = document.getElementById('dynamic-sections')
+  console.log('[CMS] Container encontrado:', !!container, '| Secciones a renderizar:', sections?.length)
   if (container && sections?.length) {
-    container.innerHTML = sections.map(renderSection).join('')
+    try {
+      container.innerHTML = sections.map(renderSection).join('')
+      console.log('[CMS] Secciones renderizadas OK')
+    } catch (err) {
+      console.error('[CMS] Error al renderizar secciones:', err.message, err.stack)
+    }
   }
 
-  // ─ Payment
   setText('payment.title',               payment?.title)
   setText('payment.description',         payment?.description)
   setText('payment.shippingTitle',       payment?.shippingTitle)
   setText('payment.shippingDescription', payment?.shippingDescription)
   setText('payment.warrantyText',        payment?.warrantyText)
   renderPaymentMethods(payment?.methods)
+  console.log('[CMS] init() completado')
 }
 
-document.addEventListener('DOMContentLoaded', init)
+// Con defer el DOM ya está parseado, pero cubrimos ambos casos
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init)
+} else {
+  init()
+}

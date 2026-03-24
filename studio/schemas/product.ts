@@ -14,18 +14,9 @@ export default defineType({
     defineField({
       name: 'category',
       title: 'Categoría',
-      type: 'string',
-      options: {
-        list: [
-          { title: 'iPhone',        value: 'iphone'      },
-          { title: 'iPad',          value: 'ipad'        },
-          { title: 'Mac',           value: 'mac'         },
-          { title: 'Wearable / Audio', value: 'wearable' },
-          { title: 'Android',       value: 'android'     },
-          { title: 'Gaming',        value: 'gaming'      },
-        ],
-        layout: 'radio',
-      },
+      type: 'reference',
+      to: [{ type: 'category' }],
+      description: 'Seleccioná una categoría existente o creá una nueva desde el botón "Create new".',
       validation: Rule => Rule.required(),
     }),
     defineField({

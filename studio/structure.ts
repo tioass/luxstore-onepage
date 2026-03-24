@@ -38,8 +38,8 @@ export const structure = (S: StructureBuilder) =>
       S.divider(),
 
       // ── Contenido dinámico ───────────────────────────────────
-      S.documentTypeListItem('section')
-        .title('📂 Secciones'),
+      S.documentTypeListItem('category')
+        .title('📂 Categorías'),
 
       S.documentTypeListItem('product')
         .title('🛍️  Productos'),

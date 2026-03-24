@@ -1,7 +1,7 @@
 import siteSettings  from './siteSettings'
 import hero          from './hero'
 import product       from './product'
-import section       from './section'
+import category      from './category'
 import paymentSection from './paymentSection'
 
 export const schemaTypes = [
@@ -10,6 +10,6 @@ export const schemaTypes = [
   hero,
   paymentSection,
   // Documentos (múltiples instancias)
-  section,
+  category,
   product,
 ]

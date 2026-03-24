@@ -294,7 +294,7 @@ async function build() {
   fs.writeFileSync(path.join(distDir, 'index.html'), html, 'utf-8')
 
   // 10. Copy static assets that might be needed
-  const staticFiles = ['favicon.ico', 'robots.txt']
+  const staticFiles = ['favicon.ico', 'robots.txt', '_headers']
   for (const file of staticFiles) {
     const src = path.join(__dirname, file)
     if (fs.existsSync(src)) {

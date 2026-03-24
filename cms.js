@@ -124,92 +124,78 @@ function setImage(key, url) {
 
 // ── Bento Grid Layout ─────────────────────────────────────────
 //
-//  n=1  →  [    0    ]
-//  n=2  →  [  0  ][  1  ]
-//  n=3  →  [  0  ][1]
-//          [  0  ][2]
-//  n=4  →  [  0  ][1][2]
-//          [  0  ][  3  ]
-//  n=5+ →  [  0  ][1][2]
-//          [  0  ][3][4]
-
-function bentoColClasses(index, total) {
-  if (total === 1) {
-    return index === 0 ? 'col-span-4' : ''
-  }
-  if (total === 2) {
-    return 'col-span-2'
-  }
-  // 3+ — primer card siempre es el featured grande
-  if (index === 0) return 'col-span-2 row-span-2'
-  if (total === 3) return 'col-span-2'
-  if (total === 4) return index === 3 ? 'col-span-2' : 'col-span-1'
-  return 'col-span-1' // 5+
-}
+// Layout flexible: featured (izq grande) + estándar (der, fluyen)
+// Sin filas fijas — el contenido respira naturalmente.
+//
+//  ┌──────────┬─────┐
+//  │          │  1  │
+//  │  FEAT 0  ├─────┤
+//  │          │  2  │
+//  ├─────┬────┴─────┤
+//  │  3  │    4     │
+//  └─────┴──────────┘
 
 // ── Card: Producto Destacado (featured) ───────────────────────
-// Layout: imagen 16:9 cover arriba | contenido abajo
 function featuredCard(product) {
   const price = product.startingPrice
-    ? `<span class="text-2xl font-mono">USD ${product.startingPrice.toLocaleString('es-AR')}</span>`
+    ? `<span class="text-2xl font-mono font-bold text-primary">USD ${product.startingPrice.toLocaleString('es-AR')}</span>`
     : ''
 
   const features = product.features?.length
-    ? `<ul class="space-y-2 mb-5">
+    ? `<ul class="space-y-2 mb-6">
         ${product.features.map(f => `
-          <li class="flex items-center gap-2 text-sm text-on-surface-variant">
-            <span class="material-symbols-outlined text-primary" style="font-size:16px">check_circle</span>
+          <li class="flex items-center gap-2.5 text-sm text-on-surface-variant">
+            <span class="material-symbols-outlined text-primary" style="font-size:18px;font-variation-settings:'FILL' 1">check_circle</span>
             ${f}
           </li>`).join('')}
        </ul>`
     : ''
 
   const image = product.image
-    ? `<div class="w-full aspect-video overflow-hidden">
-         <img src="${product.image}"
-              alt="${product.name}"
-              class="w-full h-full object-cover
-                     group-hover:scale-105 transition-transform duration-700"/>
+    ? `<div class="w-full aspect-[4/3] overflow-hidden bg-surface-container-high">
+         <img src="${product.image}" alt="${product.name}"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"/>
        </div>`
-    : `<div class="w-full aspect-video bg-surface-container-high"></div>`
+    : `<div class="w-full aspect-[4/3] bg-surface-container-high flex items-center justify-center">
+         <span class="material-symbols-outlined text-6xl text-outline-variant/30">image</span>
+       </div>`
 
   return `
-    <div class="h-full bg-surface-container rounded-xl overflow-hidden flex flex-col group">
+    <div class="h-full bg-surface-container rounded-2xl overflow-hidden flex flex-col group
+                border border-outline-variant/10 hover:border-primary/30 transition-colors duration-300">
       ${image}
-      <div class="flex-1 p-8 flex flex-col">
-        <h3 class="text-2xl font-bold mb-1 leading-tight">${product.name}</h3>
-        <p class="text-on-surface-variant text-sm mb-4 leading-relaxed">${product.tagline ?? ''}</p>
+      <div class="flex-1 p-6 md:p-8 flex flex-col">
+        <h3 class="text-xl md:text-2xl font-bold mb-2 leading-tight">${product.name}</h3>
+        <p class="text-on-surface-variant text-sm mb-5 leading-relaxed">${product.tagline ?? ''}</p>
         ${features}
-        <div class="mt-auto">${price}</div>
+        <div class="mt-auto pt-4 border-t border-outline-variant/10">${price}</div>
       </div>
     </div>`
 }
 
 // ── Card: Producto Estándar ───────────────────────────────────
-// Layout: imagen 16:9 cover arriba | nombre + precio abajo
 function standardCard(product) {
   const price = product.startingPrice
-    ? `<span class="font-mono text-sm font-bold shrink-0">USD ${product.startingPrice.toLocaleString('es-AR')}</span>`
+    ? `<span class="font-mono text-sm font-bold text-primary">USD ${product.startingPrice.toLocaleString('es-AR')}</span>`
     : ''
 
   const image = product.image
-    ? `<div class="w-full aspect-video overflow-hidden">
-         <img src="${product.image}"
-              alt="${product.name}"
-              class="w-full h-full object-cover
-                     group-hover:scale-105 transition-transform duration-500"/>
+    ? `<div class="w-full aspect-[3/2] overflow-hidden bg-surface-container-high">
+         <img src="${product.image}" alt="${product.name}"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
        </div>`
-    : `<div class="w-full aspect-video bg-surface-container"></div>`
+    : `<div class="w-full aspect-[3/2] bg-surface-container-high flex items-center justify-center">
+         <span class="material-symbols-outlined text-4xl text-outline-variant/30">image</span>
+       </div>`
 
   return `
-    <div class="h-full bg-surface-container-low rounded-xl overflow-hidden flex flex-col group">
+    <div class="h-full bg-surface-container-low rounded-2xl overflow-hidden flex flex-col group
+                border border-outline-variant/10 hover:border-primary/30 transition-colors duration-300">
       ${image}
-      <div class="flex-1 px-5 py-4 flex flex-col justify-between">
-        <h4 class="font-bold text-base leading-tight">${product.name}</h4>
-        <div class="flex items-end justify-between gap-2 mt-2">
-          <p class="text-xs text-on-surface-variant line-clamp-2">${product.tagline ?? ''}</p>
-          ${price}
-        </div>
+      <div class="flex-1 p-5 flex flex-col">
+        <h4 class="font-bold text-base leading-tight mb-1">${product.name}</h4>
+        <p class="text-xs text-on-surface-variant line-clamp-2 mb-3 leading-relaxed">${product.tagline ?? ''}</p>
+        <div class="mt-auto">${price}</div>
       </div>
     </div>`
 }
@@ -221,29 +207,59 @@ function renderSection(section) {
   const products = section.products
   const total    = products.length
 
-  const cards = products.map((product, i) => {
-    const colClasses = bentoColClasses(i, total)
-    const cardHTML   = i === 0 && total !== 2
-      ? featuredCard(product)
-      : standardCard(product)
+  // Solo 1 producto → card ancha
+  if (total === 1) {
+    return `
+      <section class="py-20 px-6 md:px-12 max-w-[1440px] mx-auto">
+        ${sectionHeader(section)}
+        <div class="max-w-2xl">
+          ${featuredCard(products[0])}
+        </div>
+      </section>`
+  }
 
-    return `<div class="${colClasses}">${cardHTML}</div>`
-  }).join('')
+  // Solo 2 → dos cards iguales
+  if (total === 2) {
+    return `
+      <section class="py-20 px-6 md:px-12 max-w-[1440px] mx-auto">
+        ${sectionHeader(section)}
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          ${products.map(p => `<div>${standardCard(p)}</div>`).join('')}
+        </div>
+      </section>`
+  }
+
+  // 3+ → featured left + rest right in grid
+  const featured = products[0]
+  const rest     = products.slice(1)
+
+  // Decidir columnas del grid derecho según cantidad
+  const rightCols = rest.length <= 2 ? 1 : 2
+
+  const rightCards = rest.map(p => `<div>${standardCard(p)}</div>`).join('')
 
   return `
-    <section class="py-24 px-12 max-w-[1440px] mx-auto">
-      <div class="mb-12">
-        ${section.sectionLabel
-          ? `<span class="text-xs tracking-[0.2em] text-primary mb-4 block uppercase font-bold">
-               ${section.sectionLabel}
-             </span>`
-          : ''}
-        <h2 class="text-4xl md:text-6xl font-bold tracking-tight">${section.title}</h2>
-      </div>
-      <div class="grid grid-cols-4 gap-3 auto-rows-[220px]">
-        ${cards}
+    <section class="py-20 px-6 md:px-12 max-w-[1440px] mx-auto">
+      ${sectionHeader(section)}
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <div>${featuredCard(featured)}</div>
+        <div class="grid grid-cols-${rightCols} gap-4 auto-rows-min">
+          ${rightCards}
+        </div>
       </div>
     </section>`
+}
+
+function sectionHeader(section) {
+  return `
+    <div class="mb-10">
+      ${section.sectionLabel
+        ? `<span class="text-xs tracking-[0.2em] text-primary mb-3 block uppercase font-bold">
+             ${section.sectionLabel}
+           </span>`
+        : ''}
+      <h2 class="text-4xl md:text-6xl font-bold tracking-tight">${section.title}</h2>
+    </div>`
 }
 
 // ── Render de Métodos de Pago ─────────────────────────────────

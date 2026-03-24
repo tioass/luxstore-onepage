@@ -209,22 +209,88 @@ function replaceDataCmsSrc(html, key, url) {
 }
 
 // ── SEO meta tags ─────────────────────────────────────────────
+const SITE_URL = 'https://luxstore-onepage.pages.dev'
+
 function injectMeta(html, data) {
   const { site, hero } = data
-  const title = site?.brandName || 'Luxstore'
-  const description = site?.footerTagline || ''
+  const brandName = site?.brandName || 'Luxstore'
+  const title = `${brandName} | Distribución Tech Premium`
+  const description = site?.footerTagline || 'Distribución de tecnología premium en Latinoamérica. iPhone, iPad, Mac, wearables, gaming y más.'
+  const heroImg = hero?.backgroundImage
+    ? `${hero.backgroundImage}?w=1200&fm=jpg&q=80`
+    : ''
 
   const metaTags = `
 <meta name="description" content="${esc(description)}"/>
-<meta property="og:title" content="${esc(title)} | Distribución Tech Premium"/>
+<link rel="canonical" href="${SITE_URL}/"/>
+<meta property="og:title" content="${esc(title)}"/>
 <meta property="og:description" content="${esc(description)}"/>
 <meta property="og:type" content="website"/>
+<meta property="og:url" content="${SITE_URL}/"/>
+<meta property="og:site_name" content="${esc(brandName)}"/>
+<meta property="og:locale" content="es_LA"/>${heroImg ? `\n<meta property="og:image" content="${esc(heroImg)}"/>` : ''}
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:title" content="${esc(title)}"/>
-<meta name="twitter:description" content="${esc(description)}"/>`
+<meta name="twitter:description" content="${esc(description)}"/>${heroImg ? `\n<meta name="twitter:image" content="${esc(heroImg)}"/>` : ''}
+<meta name="robots" content="index, follow"/>
+<link rel="alternate" hreflang="es" href="${SITE_URL}/"/>`
+
+  // Update <title> with dynamic brand name
+  html = html.replace(
+    /<title>[^<]*<\/title>/,
+    `<title>${esc(title)}</title>`
+  )
 
   // Insert after <title>
-  return html.replace('</title>', `</title>${metaTags}`)
+  html = html.replace('</title>', `</title>${metaTags}`)
+  return html
+}
+
+function injectJsonLd(html, data) {
+  const { site, products } = data
+  const brandName = site?.brandName || 'Luxstore'
+
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": brandName,
+    "url": SITE_URL,
+    "description": site?.footerTagline || 'Distribución de tecnología premium en Latinoamérica.',
+  }
+
+  const productList = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": `Productos ${brandName}`,
+    "numberOfItems": products?.length ?? 0,
+    "itemListElement": (products ?? []).slice(0, 10).map((p, i) => ({
+      "@type": "ListItem",
+      "position": i + 1,
+      "item": {
+        "@type": "Product",
+        "name": p.name,
+        "description": p.tagline || '',
+        ...(p.startingPrice ? { "offers": { "@type": "Offer", "price": p.startingPrice, "priceCurrency": "USD" } } : {}),
+      }
+    }))
+  }
+
+  const jsonLd = `<script type="application/ld+json">${JSON.stringify(schema)}</script>\n<script type="application/ld+json">${JSON.stringify(productList)}</script>`
+  return html.replace('</head>', `${jsonLd}\n</head>`)
+}
+
+// ── Sitemap generator ────────────────────────────────────────
+function generateSitemap() {
+  const today = new Date().toISOString().split('T')[0]
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>${SITE_URL}/</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>`
 }
 
 // ── Main build ────────────────────────────────────────────────
@@ -246,6 +312,7 @@ async function build() {
 
   // 4. Inject SEO meta tags
   html = injectMeta(html, data)
+  html = injectJsonLd(html, data)
 
   // 5. Replace data-cms text fields
   html = replaceDataCms(html, 'site.brandName', site?.brandName)
@@ -294,7 +361,7 @@ async function build() {
   fs.writeFileSync(path.join(distDir, 'index.html'), html, 'utf-8')
 
   // 10. Copy static assets that might be needed
-  const staticFiles = ['favicon.ico', 'robots.txt', '_headers']
+  const staticFiles = ['favicon.ico', 'robots.txt', '_headers', 'llms.txt']
   for (const file of staticFiles) {
     const src = path.join(__dirname, file)
     if (fs.existsSync(src)) {
@@ -302,10 +369,13 @@ async function build() {
     }
   }
 
+  // 11. Generate sitemap.xml
+  fs.writeFileSync(path.join(distDir, 'sitemap.xml'), generateSitemap(), 'utf-8')
+
   const sizeKB = (Buffer.byteLength(html, 'utf-8') / 1024).toFixed(1)
   console.log(`\n✅ Build completo → dist/index.html (${sizeKB} KB)`)
   console.log(`   ${sections.length} secciones, ${products?.length ?? 0} productos pre-renderizados`)
-  console.log('   SEO meta tags inyectados')
+  console.log('   SEO: meta tags, canonical, OG, sitemap.xml, robots.txt, llms.txt')
   console.log('   cms.js eliminado (todo está en el HTML)')
 }
 

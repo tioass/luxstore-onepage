@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://luxstore-onepage.pages.dev/sitemap.xml

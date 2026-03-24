@@ -1,0 +1,24 @@
+# Luxstore
+
+> Distribución de tecnología premium en Latinoamérica.
+
+Luxstore es un distribuidor de productos tecnológicos premium. Ofrece las últimas novedades en smartphones, tablets, computadoras, wearables, audio y gaming de las marcas más reconocidas del mundo.
+
+## Categorías de productos
+
+- iPhone: toda la línea de smartphones Apple
+- iPad: tablets Apple para productividad y creatividad
+- Mac: computadoras de escritorio y portátiles Apple
+- Wearables y Audio: Apple Watch, AirPods y accesorios
+- Gaming: consolas y dispositivos de realidad virtual
+- Accesorios: complementos y periféricos
+
+## Información comercial
+
+- Métodos de pago: Zelle, Payoneer, Wise, USDT (TRC-20)
+- Envíos internacionales disponibles
+- Garantía incluida en todos los productos
+
+## Contacto
+
+Sitio web: https://luxstore-onepage.pages.dev

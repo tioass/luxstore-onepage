@@ -1,3 +1,9 @@
 studio/node_modules
 studio/.sanity
+studio/dist
 .DS_Store
+dist/
+node_modules/
+
+# Local Netlify folder
+.netlify

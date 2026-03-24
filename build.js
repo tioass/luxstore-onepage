@@ -54,7 +54,18 @@ function esc(str) {
     .replace(/"/g, '&quot;')
 }
 
-// ── Card HTML generators (misma lógica que cms.js) ────────────
+// ── Sanity image optimization ─────────────────────────────────
+// Appends ?w=WIDTH&fm=webp&q=80 to Sanity CDN URLs for smaller files
+function optimizeImage(url, width = 800) {
+  if (!url) return null
+  // Only optimize Sanity CDN images
+  if (url.includes('cdn.sanity.io')) {
+    return `${url}?w=${width}&fm=webp&q=80&auto=format`
+  }
+  return url
+}
+
+// ── Card HTML generators ──────────────────────────────────────
 function featuredCard(p) {
   const price = p.startingPrice
     ? `<span class="text-2xl font-mono font-bold text-primary">USD ${Number(p.startingPrice).toLocaleString('es-AR')}</span>`
@@ -68,17 +79,19 @@ function featuredCard(p) {
          </li>`).join('')}</ul>`
     : ''
 
-  const image = p.image
+  const imgUrl = optimizeImage(p.image, 800)
+  const image = imgUrl
     ? `<div class="w-full aspect-[4/3] overflow-hidden bg-surface-container-high">
-         <img src="${esc(p.image)}" alt="${esc(p.name)}" loading="lazy"
+         <img src="${esc(imgUrl)}" alt="${esc(p.name)}" loading="lazy" decoding="async"
+              width="800" height="600"
               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"/>
        </div>`
     : `<div class="w-full aspect-[4/3] bg-surface-container-high flex items-center justify-center">
-         <span class="material-symbols-outlined text-6xl text-outline-variant/30">image</span>
+         <span class="material-symbols-outlined text-6xl text-outline-variant/30" aria-hidden="true">image</span>
        </div>`
 
   return `
-    <div class="h-full bg-surface-container rounded-2xl overflow-hidden flex flex-col group
+    <article class="h-full bg-surface-container rounded-2xl overflow-hidden flex flex-col group
                 border border-outline-variant/10 hover:border-primary/30 transition-colors duration-300">
       ${image}
       <div class="flex-1 p-6 md:p-8 flex flex-col">
@@ -87,7 +100,7 @@ function featuredCard(p) {
         ${features}
         <div class="mt-auto pt-4 border-t border-outline-variant/10">${price}</div>
       </div>
-    </div>`
+    </article>`
 }
 
 function standardCard(p) {
@@ -95,17 +108,19 @@ function standardCard(p) {
     ? `<span class="font-mono text-sm font-bold text-primary">USD ${Number(p.startingPrice).toLocaleString('es-AR')}</span>`
     : ''
 
-  const image = p.image
+  const imgUrl = optimizeImage(p.image, 500)
+  const image = imgUrl
     ? `<div class="w-full aspect-[3/2] overflow-hidden bg-surface-container-high">
-         <img src="${esc(p.image)}" alt="${esc(p.name)}" loading="lazy"
+         <img src="${esc(imgUrl)}" alt="${esc(p.name)}" loading="lazy" decoding="async"
+              width="500" height="333"
               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
        </div>`
     : `<div class="w-full aspect-[3/2] bg-surface-container-high flex items-center justify-center">
-         <span class="material-symbols-outlined text-4xl text-outline-variant/30">image</span>
+         <span class="material-symbols-outlined text-4xl text-outline-variant/30" aria-hidden="true">image</span>
        </div>`
 
   return `
-    <div class="h-full bg-surface-container-low rounded-2xl overflow-hidden flex flex-col group
+    <article class="h-full bg-surface-container-low rounded-2xl overflow-hidden flex flex-col group
                 border border-outline-variant/10 hover:border-primary/30 transition-colors duration-300">
       ${image}
       <div class="flex-1 p-5 flex flex-col">
@@ -113,7 +128,7 @@ function standardCard(p) {
         <p class="text-xs text-on-surface-variant line-clamp-2 mb-3 leading-relaxed">${esc(p.tagline)}</p>
         <div class="mt-auto">${price}</div>
       </div>
-    </div>`
+    </article>`
 }
 
 function sectionHeader(section) {

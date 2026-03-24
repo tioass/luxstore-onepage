@@ -3,10 +3,17 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta name="theme-color" content="#131313"/>
 <title>Luxstore | Distribución Tech Premium</title>
+<!-- Preconnect para eliminar latencia DNS/TLS -->
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="preconnect" href="https://cdn.sanity.io" crossorigin/>
+<!-- Fonts: swap para evitar FOIT -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@400,0..1&display=swap" rel="stylesheet"/>
+<!-- Tailwind CDN (dev convenience — producción podría usar CSS compilado) -->
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
   tailwind.config = {
     darkMode: "class",
@@ -99,12 +106,12 @@
 <body class="bg-background text-on-background font-body antialiased">
 
 <!-- ── Header ──────────────────────────────────────────────── -->
-<header class="fixed top-0 w-full z-50 glass-nav">
-  <div class="flex justify-center items-center px-12 h-16 max-w-[1440px] mx-auto">
-    <div class="text-2xl font-bold tracking-tighter text-[#e2e2e2]" data-cms="site.brandName">
+<header class="fixed top-0 w-full z-50 glass-nav" role="banner">
+  <nav class="flex justify-center items-center px-12 h-16 max-w-[1440px] mx-auto" aria-label="Navegación principal">
+    <a href="/" class="text-2xl font-bold tracking-tighter text-[#e2e2e2]" data-cms="site.brandName">
       Luxstore
-    </div>
-  </div>
+    </a>
+  </nav>
 </header>
 
 <!-- ── Hero ────────────────────────────────────────────────── -->
@@ -129,7 +136,9 @@
     <img
       data-cms-src="hero.backgroundImage"
       src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2zDw6kJhHqiBtbJcuMWyA1OfIPMDFxEeOKZ6qVBBEhdkGNs7mC8Md84Sguzc6Tt00qT4Zkf4zNQT7nFUbc-EXe5tTJJ8hb3FNmZ8RGiLIfrxiqm8RvVmtCpSSo3s30kHsrslpPbHaGzriwVlX9qveVVINBhbCi_nserKz1NcZewaCh6oYBtsk2Hz89o3wF1bfxTw9YuA096JMmG-Vwfszwv220Tip7iYdYrl7dT87Rb84xfrrndk1NBwGdd6YHYRMBJEl7q6h2uk"
-      alt="Hero background"
+      alt="Fondo hero del producto destacado"
+      width="1440" height="900"
+      fetchpriority="high"
       class="w-full h-full object-cover"/>
   </div>
   <div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
@@ -168,24 +177,29 @@
     </div>
     <div class="bg-surface-container-high rounded-2xl p-12">
       <h3 class="text-2xl font-bold mb-8">Distribución B2B</h3>
-      <form class="space-y-6">
+      <form class="space-y-6" aria-label="Formulario de contacto B2B">
         <div>
-          <label class="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2">
+          <label for="company-name" class="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2">
             Nombre de la Empresa
           </label>
           <input
+            id="company-name"
+            name="company"
+            autocomplete="organization"
             class="w-full bg-surface-container-lowest border border-outline-variant/20 rounded-lg p-3 focus:outline-none focus:ring-1 focus:ring-primary transition-all"
             type="text"/>
         </div>
         <div>
-          <label class="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2">
+          <label for="message" class="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2">
             Mensaje / Pedido por Volumen
           </label>
           <textarea
+            id="message"
+            name="message"
             class="w-full bg-surface-container-lowest border border-outline-variant/20 rounded-lg p-3 h-32 focus:outline-none focus:ring-1 focus:ring-primary transition-all">
           </textarea>
         </div>
-        <button class="w-full bg-on-surface text-background py-4 rounded-lg font-bold hover:bg-on-surface/90 transition-all active:scale-95">
+        <button type="submit" class="w-full bg-on-surface text-background py-4 rounded-lg font-bold hover:bg-on-surface/90 transition-all active:scale-95">
           Enviar Consulta
         </button>
         <p class="text-center text-xs text-on-surface-variant mt-4" data-cms="payment.warrantyText">
@@ -203,10 +217,10 @@
     <p class="text-on-surface-variant text-sm max-w-xl mx-auto mb-8" data-cms="site.footerTagline">
       Distribución tech premium para la era digital. Importamos el hardware más innovador del mundo para entusiastas y empresas locales.
     </p>
-    <div class="flex justify-center gap-8 mb-12">
-      <span class="material-symbols-outlined text-on-surface-variant cursor-default">language</span>
-      <span class="material-symbols-outlined text-on-surface-variant cursor-default">share</span>
-      <span class="material-symbols-outlined text-on-surface-variant cursor-default">verified_user</span>
+    <div class="flex justify-center gap-8 mb-12" role="list" aria-label="Enlaces del sitio">
+      <span class="material-symbols-outlined text-on-surface-variant cursor-default" role="listitem" aria-label="Sitio web">language</span>
+      <span class="material-symbols-outlined text-on-surface-variant cursor-default" role="listitem" aria-label="Compartir">share</span>
+      <span class="material-symbols-outlined text-on-surface-variant cursor-default" role="listitem" aria-label="Verificado">verified_user</span>
     </div>
     <div class="pt-8 border-t border-outline-variant/10">
       <p class="font-['Inter'] text-sm tracking-wide text-[#e2e2e2]/40" data-cms="site.footerCopyright">

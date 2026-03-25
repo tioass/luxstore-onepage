@@ -1,4 +1,5 @@
 import { defineField, defineType } from 'sanity'
+import { CategorySelect } from '../components/CategorySelect'
 
 export default defineType({
   name: 'product',
@@ -16,8 +17,11 @@ export default defineType({
       title: 'Categoría',
       type: 'reference',
       to: [{ type: 'category' }],
-      description: 'Seleccioná una categoría existente o creá una nueva desde el botón "Create new".',
+      description: 'Seleccioná una categoría o creá una nueva con el botón +',
       validation: Rule => Rule.required(),
+      components: {
+        input: CategorySelect,
+      },
     }),
     defineField({
       name: 'tagline',
@@ -32,12 +36,6 @@ export default defineType({
       description: 'Solo el número. Ej: 999',
     }),
     defineField({
-      name: 'storage',
-      title: 'Almacenamiento disponible',
-      type: 'string',
-      description: 'Ej: 256GB - 2TB',
-    }),
-    defineField({
       name: 'features',
       title: 'Características destacadas',
       type: 'array',
@@ -45,37 +43,11 @@ export default defineType({
       description: 'Lista de bullet points. Solo para el producto destacado.',
     }),
     defineField({
-      name: 'chips',
-      title: 'Chips / Tags técnicos',
-      type: 'array',
-      of: [{ type: 'string' }],
-      description: 'Ej: M4 Max, Liquid XDR. Solo para Macs.',
-    }),
-    defineField({
       name: 'image',
       title: 'Imagen del producto',
       type: 'image',
       options: { hotspot: true },
     }),
-    defineField({
-      name: 'ctaLabel',
-      title: 'Texto del botón de acción',
-      type: 'string',
-      description: 'Ej: Comprar ahora',
-    }),
-    defineField({
-      name: 'order',
-      title: 'Orden de aparición',
-      type: 'number',
-      description: 'Número menor = aparece primero.',
-    }),
-  ],
-  orderings: [
-    {
-      title: 'Orden de aparición',
-      name: 'orderAsc',
-      by: [{ field: 'order', direction: 'asc' }],
-    },
   ],
   preview: {
     select: {
